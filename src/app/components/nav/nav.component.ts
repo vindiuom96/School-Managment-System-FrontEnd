@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-nav',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() {
+  constructor(private notify : SnotifyService) {
    }
 
   ngOnInit() {
+  }
+
+  logout(Event = MouseEvent){
+    event.preventDefault;
+    this.notify.info("Logout Succesfully", {timeout:2000});
   }
 
 }
