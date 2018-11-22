@@ -14,6 +14,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ApiService } from './services/api.service';
 import { AfterloginService } from './services/afterlogin.service';
 import { BeforeloginService } from './services/beforelogin.service';
+import { SignupComponent } from './components/signup/signup.component';
+import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { BeforeloginService } from './services/beforelogin.service';
     NavComponent,
     DashboardComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    RequestResetComponent,
+    ResponseResetComponent
   ],
   imports: [
     BrowserModule,

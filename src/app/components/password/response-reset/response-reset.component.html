@@ -1,0 +1,32 @@
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <div class="alert alert-danger" [hidden]="!error">
+                {{ error }}
+              </div>
+            <h5 class="card-title text-center">Reset Password</h5>
+            <form class="form-signin" #ResetResponseForm=ngForm (ngSubmit)="onSubmit()">
+              <div class="form-label-group">
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="form.email">
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" [(ngModel)]="form.password" class="form-control" placeholder="Password" required>
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" name="password_confirmation" id="inputPasswordConfirmation" [(ngModel)]="form.password_confirmation" class="form-control" placeholder="Re Enter Password" required>
+              </div>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!ResetResponseForm.valid">Change Password</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
