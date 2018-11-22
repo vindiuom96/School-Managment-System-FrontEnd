@@ -1,0 +1,38 @@
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <div class="alert alert-danger" [hidden]="!error">
+              {{ error }}
+            </div>
+            <h5 class="card-title text-center">Sign In</h5>
+            <form class="form-signin" #loginForm=ngForm (ngSubmit)="onSubmit()">
+              <div class="form-label-group">
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="form.email">
+
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" [(ngModel)]="form.password" class="form-control" placeholder="Password" required>
+
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" name="remember_me" class="custom-control-input" id="customCheck1" [(ngModel)]="form.remember_me">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+            </form>
+
+            <p style="text-align: right;"><a [routerLink]="['/reset-password']" routerLinkActive="router-link-active" ><small>Fogot Password?</small></a></p>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

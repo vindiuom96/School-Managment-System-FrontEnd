@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  baseURL = "https://ems.aladinlabs.com/api/";
+  baseURL = "http://127.0.0.1:8000/api/";
 
-  post(url, data){
-    return this.http.post(`${this.baseURL}${url}`, data)
+  post(url, data, headers){
+    return this.http.post(`${this.baseURL}${url}`, data, { headers: new HttpHeaders(headers) } )
+  }
+
+  get(url, headers){
+    return this.http.get(`${this.baseURL}${url}`, { headers: new HttpHeaders(headers) } )
   }
 }
