@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import { SnotifyService } from 'ng-snotify';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) { }
+  constructor(private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) { }
 
   ngOnInit() {
-    
+    var headers = {
+      'Authorization' : this.token.get()
+    }
+    return this.api.get('auth/user', headers).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
   }
 
   pause(id){

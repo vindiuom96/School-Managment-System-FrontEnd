@@ -60,15 +60,8 @@ export class LoginComponent implements OnInit {
     console.log(data);
     this.token.set(data.token_type + " " + data.access_token);
     this.auth.changeAuthStatus(true);
+    this.router.navigateByUrl('/dashboard');
     this.notify.info("Login Succesfully", {timeout:2000});
-
-    var headers = {
-      'Authorization' : this.token.get()
-    }
-    return this.api.get('auth/user', headers).subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    );
   }
 
 }
