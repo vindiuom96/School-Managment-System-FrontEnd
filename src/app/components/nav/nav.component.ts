@@ -12,6 +12,7 @@ import { TokenService } from '../../services/token.service';
 })
 export class NavComponent implements OnInit {
   public loggedIn : boolean;
+  isCollapsed: Boolean = true;
 
   constructor(
     private auth : AuthService,
@@ -21,7 +22,9 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.authStatus.subscribe(value => this.loggedIn = value);
+    this.auth.authStatus.subscribe(
+      value => this.loggedIn = value
+    );
     console.log(this.loggedIn);
   }
 

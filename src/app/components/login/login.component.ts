@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.notify.info("Wait...", {timeout:0});
     var headers = {
       'Content-Type' : 'application/json'
     }
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   errorHandler(error){
+    this.notify.clear();
     console.log(error);
     if(error.errors && error.errors.email){
       this.error = error.errors.email;
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   tokenHandler(data){
+    this.notify.clear();
     console.log(data);
     this.token.set(data.token_type + " " + data.access_token);
     this.auth.changeAuthStatus(true);

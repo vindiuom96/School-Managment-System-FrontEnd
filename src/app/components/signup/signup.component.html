@@ -1,3 +1,54 @@
-<p>
-  signup works!
-</p>
+<div class="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Add new User</h5>
+            <form class="form-signin" #registerForm=ngForm (ngSubmit)="onSubmit()">
+
+                <div class="alert alert-danger" [hidden]="!error.role">
+                    {{ error.role }}
+                  </div>
+                <div class="alert alert-danger" [hidden]="!error.email">
+                    {{ error.email }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.name">
+                      {{ error.name }}
+                    </div>
+                  <div class="alert alert-danger" [hidden]="!error.password">
+                      {{ error.password }}
+                    </div>
+                  <!-- <div class="form-label-group">
+                    <p>Role:</p>
+                    <select class="form-control" name="role" id="inputRole" required [(ngModel)]="form.role" autofocus>
+                        <option value="CompanyAdmin">CompanyAdmin</option>
+                      </select>
+                    </div> -->
+
+              <div class="form-label-group">
+                  <input type="name" name="name" id="inputName" class="form-control" placeholder="Name" [(ngModel)]="form.name" required>
+                </div>
+                <div class="form-label-group">
+                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required [(ngModel)]="form.email">
+                  </div>
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" [(ngModel)]="form.password" class="form-control" placeholder="Password" required>
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" name="password_confirmation" id="inputPasswordConfirm" [(ngModel)]="form.password_confirmation" class="form-control" placeholder="Re enter Password" required>
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" name="terms" class="custom-control-input" id="customCheck1" [(ngModel)]="form.terms">
+                <label class="custom-control-label" for="customCheck1">Agree terms and conditions</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!registerForm.valid || form.terms==false">Add</button>
+            </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

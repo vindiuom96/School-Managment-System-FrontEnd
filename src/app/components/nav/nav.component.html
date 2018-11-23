@@ -1,8 +1,21 @@
-<nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand text-white" routerLink="">Role Managment</a>
-  <div class="">
-    <a class="text-white" routerLink="login" style="padding-right: 20px;" *ngIf="!loggedIn">Login</a>
-    <a class="text-white" routerLink="signup" style="padding-right: 20px;" *ngIf="!loggedIn">Register</a>
-    <a class="text-white" href="javascript:void(0)" (click)="logout($event)" style="padding-right: 20px;" *ngIf="loggedIn">Logout</a>
-</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="" *ngIf="!loggedIn">Role Managment</a>
+  <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn">Role Managment</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
+  data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="text-white" routerLink="login" style="padding-right: 20px;" *ngIf="!loggedIn">Login</a>
+      <a class="text-white" routerLink="signup" style="padding-right: 20px;" *ngIf="!loggedIn">Register</a>
+
+      <a class="text-white" routerLink="users" style="padding-right: 20px;" *ngIf="loggedIn">Users</a>
+      <a class="text-white" href="javascript:void(0)" (click)="logout($event)" style="padding-right: 20px;" *ngIf="loggedIn">Logout</a>
+    </form>
+  </div>
 </nav>
+

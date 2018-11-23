@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { BeforeloginService } from './services/beforelogin.service';
 import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +29,16 @@ import { ResponseResetComponent } from './components/password/response-reset/res
     LoginComponent,
     SignupComponent,
     RequestResetComponent,
-    ResponseResetComponent
+    ResponseResetComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     SnotifyModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     ApiService,

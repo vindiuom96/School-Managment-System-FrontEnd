@@ -6,6 +6,7 @@ import { BeforeloginService } from './services/beforelogin.service';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
@@ -20,6 +21,11 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate : [BeforeloginService]
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate : [AfterloginService]
   },
   {
     path: 'dashboard',
