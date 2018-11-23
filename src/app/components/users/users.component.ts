@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import { SnotifyService } from 'ng-snotify';
 import { Router } from '@angular/router';
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { TokenService } from '../../services/token.service'
 
@@ -15,7 +16,12 @@ export class UsersComponent implements OnInit {
 
   users = null;
   host = this.api.host;
-  public error = [];
+  error = [];
+  keyword = null;
+  pagination = {
+    'page' :  '1',
+    'max' : '10'
+  }
 
   data = {
     "id" : null,
@@ -33,18 +39,38 @@ export class UsersComponent implements OnInit {
     'Authorization' : this.token.get()
   }
 
-  constructor(private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) { }
+  constructor(private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+    pg.boundaryLinks = true;
+    pg.rotate = true;
+  }
 
   ngOnInit() {
-    return this.api.get('users', this.headers).subscribe(
-      data => this.datahandler(data),
-      error => { this.token.remove(); this.router.navigateByUrl("/login"); }
-    );
+    if(this.keyword)
+      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page, this.headers).subscribe(
+        data => this.datahandler(data),
+        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+      );
+    else
+      this.api.get('users?page=' + this.pagination.page, this.headers).subscribe(
+        data => this.datahandler(data),
+        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+      );
   }
 
   datahandler(data){
     console.log(data.data);
     this.users = data.data;
+    this.pagination.max = data.total;
+  }
+
+  paginateClick(page){
+    console.log(page);
+    this.pagination.page = page;
+    this.ngOnInit();
+  }
+
+  search(){
+    this.ngOnInit();
   }
 
   pause(id){

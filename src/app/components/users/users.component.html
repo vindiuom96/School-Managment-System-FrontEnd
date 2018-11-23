@@ -3,8 +3,11 @@
     <div class="col-6">
       <h3>Users</h3>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-md-3 col-6 text-right">
       <a class="text-white btn btn-info" (click)='add()'>Add New User</a>
+    </div>
+    <div class="col-md-3 text-right">
+      <input type="search" class="form-control" id="search" name="search" placeholder="Search"  [(ngModel)]="keyword" (keyup)="search()"/>
     </div>
   </div>
 </div>
@@ -45,7 +48,10 @@
             </tr>
           </tbody>
         </table>
-  </div>
+        <div class="col-12 justify-content-center" style="display: flex !important; justify-content: center !important;">
+          <ngb-pagination [(collectionSize)]="pagination.max" (pageChange)="paginateClick($event)" [(page)]="pagination.page" (onclick)="paginateClick()"></ngb-pagination>
+        </div>
+      </div>
 
   <!-- The Modal -->
   <div id="editModal" class="modal" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
