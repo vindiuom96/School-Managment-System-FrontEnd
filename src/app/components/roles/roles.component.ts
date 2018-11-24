@@ -8,13 +8,13 @@ import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { TokenService } from '../../services/token.service'
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-roles',
+  templateUrl: './roles.component.html',
+  styleUrls: ['./roles.component.css']
 })
-export class UsersComponent implements OnInit {
+export class RolesComponent implements OnInit {
 
-  users = null;     //Store API Data
+  roles = null;     //Store API Data
   error = [];       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
@@ -22,16 +22,13 @@ export class UsersComponent implements OnInit {
     'max' : '10'
   }
 
-  data = {          //User Update Data
+  data = {          //Role Update Data
     "id" : null,
     "name" : null,
   }
 
-  form = {         //New User add Data
-    name : null,
-    email : null,
-    password : null,
-    password_confirmation : null,
+  form = {         //New Role add Data
+    name : null
   }
 
   headers = {     //Token for API Authorization
@@ -52,11 +49,11 @@ export class UsersComponent implements OnInit {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
     if(this.keyword)
-      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('roles?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
       ); else
-      this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('roles?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
       );
@@ -65,7 +62,7 @@ export class UsersComponent implements OnInit {
   datahandler(data){
     console.log(data.data);
     this.notify.clear();
-    this.users = data.data;
+    this.roles = data.data;
     this.pagination.max = data.total;
   }
 
@@ -96,26 +93,13 @@ export class UsersComponent implements OnInit {
     this.ngOnInit();
   }
 
-  //Pause or Active User Handling
-  pause(id){
-    this.notify.clear();
-    console.log(id);
-    var body = {
-      "id" : id
-    }
-    return this.api.post('users/pause', body, this.headers).subscribe(
-      data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
-      error => this.notify.error(error.message, {timeout: 0})
-    );
-  }
-
-  //User edit Handling
+  //Role edit Handling
   edit(id){
     this.notify.clear();
     this.data.name = null;
-    this.api.get('users/'+id, this.headers).subscribe(
+    this.api.get('roles/'+id, this.headers).subscribe(
       data => this.editDataHandler(data),
-      error => this.notify.error("User Not Found", {timeout: 0})
+      error => this.notify.error("Role Not Found", {timeout: 0})
     );
     this.data.id = id;
     var modal = document.getElementById('editModal');
@@ -129,10 +113,10 @@ export class UsersComponent implements OnInit {
   editsubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    this.api.put('users/'+this.data.id, this.data, this.headers).subscribe(
+    this.api.put('roles/'+this.data.id, this.data, this.headers).subscribe(
       data => {
         this.notify.clear();
-        this.notify.info("User Updated Successfully", {timeout: 2000});
+        this.notify.info("Role Updated Successfully", {timeout: 2000});
         this.ngOnInit();
         this.closeEditModal();
       },
@@ -146,10 +130,10 @@ export class UsersComponent implements OnInit {
     modal.style.display = "none";
   }
 
-  //User delete Handling
+  //Role delete Handling
   delete(id){
     this.notify.clear();
-    this.notify.warning('Are you sure you want to detele this User?', 'Delete User', {
+    this.notify.warning('Are you sure you want to detele this Role?', 'Delete Role', {
       timeout: 0,
       showProgressBar: false,
       closeOnClick: true,
@@ -159,7 +143,7 @@ export class UsersComponent implements OnInit {
           var headers = {
             'Authorization' : this.token.get()
           }
-          return this.api.delete('users/'+id, headers).subscribe(
+          return this.api.delete('roles/'+id, headers).subscribe(
             data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
             error => this.notify.error(error.message, {timeout: 0})
           );
@@ -169,15 +153,10 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  //New User add Handling
+  //New Role add Handling
   add(){
     this.notify.clear();
-
     this.form.name = null;
-    this.form.email = null;
-    this.form.password = null;
-    this.form.password_confirmation = null;
-
     var modal = document.getElementById('addModal');
     modal.style.display = "block";
   }
@@ -185,10 +164,10 @@ export class UsersComponent implements OnInit {
   addModalSubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    this.api.post('users', this.form, this.headers).subscribe(
+    this.api.post('roles', this.form, this.headers).subscribe(
       data => {
         this.notify.clear();
-        this.notify.info("User Added Successfully", {timeout: 2000});
+        this.notify.info("Role Added Successfully", {timeout: 2000});
         this.ngOnInit();
         this.closeAddModal();
       },
@@ -202,4 +181,6 @@ export class UsersComponent implements OnInit {
     var modal = document.getElementById('addModal');
     modal.style.display = "none";
   }
+
 }
+

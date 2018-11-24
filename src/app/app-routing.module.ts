@@ -12,6 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
+import { RolesComponent } from './components/roles/roles.component';
 
 const appRoutes: Routes = [
   {
@@ -28,11 +29,6 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate : [BeforeloginService]
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    canActivate : [AfterloginService]
   },
   {
     path: 'dashboard',
@@ -57,6 +53,16 @@ const appRoutes: Routes = [
   {
     path: 'signup/activate',
     component: SignupConfrimComponent,
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'roles',
+    component: RolesComponent,
+    canActivate : [AfterloginService]
   }
 ];
 

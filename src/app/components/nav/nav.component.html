@@ -14,6 +14,7 @@
       <a class="text-white" routerLink="signup" style="padding-right: 20px;" *ngIf="!loggedIn">Register</a>
 
       <a class="text-white" routerLink="users" style="padding-right: 20px;" *ngIf="loggedIn">Users</a>
+      <a class="text-white" routerLink="roles" style="padding-right: 20px;" *ngIf="loggedIn">Roles</a>
       <a class="text-white" href="javascript:void(0)" (click)="logout($event)" style="padding-right: 20px;" *ngIf="loggedIn">Logout</a>
     </form>
   </div>
