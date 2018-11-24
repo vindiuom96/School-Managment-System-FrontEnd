@@ -8,7 +8,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  host = "http://127.0.0.1:8000";
+  host = "https://ems.aladinlabs.com";
   baseURL = this.host + "/api/";
 
   post(url, data, headers){
