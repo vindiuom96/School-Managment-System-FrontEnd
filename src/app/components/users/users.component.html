@@ -21,6 +21,7 @@
               <th (click)="sort('name')"><a href="javascript:void(0)" style="color:black">Name <span *ngIf="sortData.col=='name'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
               <th (click)="sort('email')"><a href="javascript:void(0)" style="color:black">Email <span *ngIf="sortData.col=='email'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
               <th (click)="sort('active')"><a href="javascript:void(0)" style="color:black">Active <span *ngIf="sortData.col=='active'"><i class="fa fa-caret-down" *ngIf="sortData.order=='desc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='asc'"></i></span></a></th>
+              <th>Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -31,7 +32,10 @@
               <td>{{ user.email }}</td>
               <td *ngIf="user.active">Active</td>
               <td *ngIf="!user.active">Deactivated</td>
-                <td>
+              <td>
+                <div *ngFor="let role of user.roles">{{ role.name }}</div>
+              </td>
+              <td>
                 <a href="javascript:void(0)" class="item"  (click)='pause( user.id )' data-toggle="tooltip" data-placement="top" title="Pause" style="padding-right: 10px;" *ngIf="user.active">
                     <i class="fa fa-pause"></i>
                 </a>
@@ -75,6 +79,13 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"  required [(ngModel)]="data.name"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Role</label>
+                    <div *ngFor="let role of roles">
+                        <input type="checkbox" name="{{ role.name }}" value="{{ role.name }}" (change)="checkbox($event)" *ngIf="!data.role.includes(role.name)">
+                      <input type="checkbox" name="{{ role.name }}" value="{{ role.name }}" (change)="checkbox($event)" *ngIf="data.role.includes(role.name)" checked> {{ role.name }}
+                    </div>
                 </div>
               </form>
             </div>
@@ -120,6 +131,12 @@
                   <div class="form-group">
                       <label for="name">Email</label>
                       <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required [(ngModel)]="form.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Role</label>
+                        <div *ngFor="let role of roles">
+                            <input type="checkbox" name="{{ role.name }}" value="{{ role.name }}" (change)="checkboxAdd($event)"> {{ role.name }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="name">Password</label>

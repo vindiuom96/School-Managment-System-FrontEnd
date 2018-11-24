@@ -8,14 +8,13 @@ import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { TokenService } from '../../services/token.service'
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  selector: 'app-permissions',
+  templateUrl: './permissions.component.html',
+  styleUrls: ['./permissions.component.css']
 })
-export class RolesComponent implements OnInit {
+export class PermissionsComponent implements OnInit {
 
-  roles = null;     //Store API Data
-  permissions = null;     //Store all permissions Data
+  permissions = null;     //Store API Data
   error = [];       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
@@ -23,15 +22,13 @@ export class RolesComponent implements OnInit {
     'max' : '10'
   }
 
-  data = {          //Role Update Data
+  data = {          //Permission Update Data
     "id" : null,
     "name" : null,
-    "permission" : []
   }
 
-  form = {         //New Role add Data
-    "name" : null,
-    "permission" : []
+  form = {         //New Permission add Data
+    name : null
   }
 
   headers = {     //Token for API Authorization
@@ -52,24 +49,20 @@ export class RolesComponent implements OnInit {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
     if(this.keyword)
-      this.api.get('roles?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('permissions?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
       ); else
-      this.api.get('roles?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('permissions?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
-      );
-      this.api.get('permission', this.headers).subscribe(
-        data => { console.log(data); this.permissions=data; },
-        error => { this.notify.clear(); this.notify.error(error.error.message); }
       );
   }
 
   datahandler(data){
     console.log(data.data);
     this.notify.clear();
-    this.roles = data.data;
+    this.permissions = data.data;
     this.pagination.max = data.total;
   }
 
@@ -100,14 +93,13 @@ export class RolesComponent implements OnInit {
     this.ngOnInit();
   }
 
-  //Role edit Handling
+  //Permission edit Handling
   edit(id){
     this.notify.clear();
     this.data.name = null;
-    this.data.permission = [];
-    this.api.get('roles/'+id, this.headers).subscribe(
+    this.api.get('permissions/'+id, this.headers).subscribe(
       data => this.editDataHandler(data),
-      error => this.notify.error("Role Not Found", {timeout: 0})
+      error => this.notify.error("Permission Not Found", {timeout: 0})
     );
     this.data.id = id;
     var modal = document.getElementById('editModal');
@@ -116,27 +108,15 @@ export class RolesComponent implements OnInit {
 
   editDataHandler(data){
     this.data.name = data.name;
-    for(var i=0; i<data.permissions.length; i++)
-      this.data.permission.push(data.permissions[i].name);
-  }
-
-  checkbox(event){
-    if(event.srcElement.checked){
-      this.data.permission.push(event.srcElement.name);
-    } else {
-      var index =this.data.permission.indexOf(event.srcElement.name);
-      this.data.permission.splice(index, index+1);
-    }
-    console.log(this.data.permission);
   }
 
   editsubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    this.api.put('roles/'+this.data.id, this.data, this.headers).subscribe(
+    this.api.put('permissions/'+this.data.id, this.data, this.headers).subscribe(
       data => {
         this.notify.clear();
-        this.notify.info("Role Updated Successfully", {timeout: 2000});
+        this.notify.info("Permission Updated Successfully", {timeout: 2000});
         this.ngOnInit();
         this.closeEditModal();
       },
@@ -150,10 +130,10 @@ export class RolesComponent implements OnInit {
     modal.style.display = "none";
   }
 
-  //Role delete Handling
+  //Permission delete Handling
   delete(id){
     this.notify.clear();
-    this.notify.warning('Are you sure you want to detele this Role?', 'Delete Role', {
+    this.notify.warning('Are you sure you want to detele this Permission?', 'Delete Permission', {
       timeout: 0,
       showProgressBar: false,
       closeOnClick: true,
@@ -163,7 +143,7 @@ export class RolesComponent implements OnInit {
           var headers = {
             'Authorization' : this.token.get()
           }
-          return this.api.delete('roles/'+id, headers).subscribe(
+          return this.api.delete('permissions/'+id, headers).subscribe(
             data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
             error => this.notify.error(error.message, {timeout: 0})
           );
@@ -173,11 +153,10 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  //New Role add Handling
+  //New Permission add Handling
   add(){
     this.notify.clear();
     this.form.name = null;
-    this.form.permission = [];
     var modal = document.getElementById('addModal');
     modal.style.display = "block";
   }
@@ -185,26 +164,16 @@ export class RolesComponent implements OnInit {
   addModalSubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    this.api.post('roles', this.form, this.headers).subscribe(
+    this.api.post('permissions', this.form, this.headers).subscribe(
       data => {
         this.notify.clear();
-        this.notify.info("Role Added Successfully", {timeout: 2000});
+        this.notify.info("Permission Added Successfully", {timeout: 2000});
         this.ngOnInit();
         this.closeAddModal();
       },
       error => { this.notify.clear(); this.error = error.error.errors; }
     );
 
-  }
-
-  checkboxAdd(event){
-    if(event.srcElement.checked){
-      this.form.permission.push(event.srcElement.name);
-    } else {
-      var index =this.form.permission.indexOf(event.srcElement.name);
-      this.form.permission.splice(index, index+1);
-    }
-    console.log(this.form.permission);
   }
 
   closeAddModal(){

@@ -18,12 +18,14 @@
             <thead>
               <tr>
                 <th (click)="sort('name')"><a href="javascript:void(0)" style="color:black">Name <span *ngIf="sortData.col=='name'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
+                <th>Permissions</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let role of roles">
                 <td>{{ role.name }}</td>
+                <td><div *ngFor="let permission of role.permissions">{{ permission.name }}</div></td>
                   <td>
                   <a href="javascript:void(0)" class="item"  (click)='edit( role.id )' data-toggle="tooltip" data-placement="top" title="Edit" style="padding-right: 10px;">
                       <i class="fa fa-edit"></i>
@@ -60,6 +62,13 @@
                       <label for="name">Name</label>
                       <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"  required [(ngModel)]="data.name"/>
                   </div>
+                  <div class="form-group">
+                      <label for="name">Permissions</label>
+                      <div *ngFor="let permission of permissions">
+                          <input type="checkbox" name="{{ permission.name }}" value="{{ permission.name }}" (change)="checkbox($event)" *ngIf="!data.permission.includes(permission.name)">
+                        <input type="checkbox" name="{{ permission.name }}" value="{{ permission.name }}" (change)="checkbox($event)" *ngIf="data.permission.includes(permission.name)" checked> {{ permission.name }}
+                      </div>
+                  </div>
                 </form>
               </div>
               <div class="modal-footer">
@@ -91,6 +100,12 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                       <input type="name" name="name" id="inputName" class="form-control" placeholder="Name" [(ngModel)]="form.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Permissions</label>
+                        <div *ngFor="let permission of permissions">
+                            <input type="checkbox" name="{{ permission.name }}" value="{{ permission.name }}" (change)="checkboxAdd($event)"> {{ permission.name }}
+                        </div>
                     </div>
 
                 </form>

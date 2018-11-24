@@ -21,6 +21,7 @@ import { ResponseResetComponent } from './components/password/response-reset/res
 import { UsersComponent } from './components/users/users.component';
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { PermissionsComponent } from './components/permissions/permissions.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RolesComponent } from './components/roles/roles.component';
     ResponseResetComponent,
     UsersComponent,
     SignupConfrimComponent,
-    RolesComponent
+    RolesComponent,
+    PermissionsComponent
   ],
   imports: [
     BrowserModule,

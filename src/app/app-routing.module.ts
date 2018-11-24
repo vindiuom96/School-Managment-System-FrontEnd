@@ -13,6 +13,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { PermissionsComponent } from './components/permissions/permissions.component';
 
 const appRoutes: Routes = [
   {
@@ -62,6 +63,11 @@ const appRoutes: Routes = [
   {
     path: 'roles',
     component: RolesComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'permissions',
+    component: PermissionsComponent,
     canActivate : [AfterloginService]
   }
 ];

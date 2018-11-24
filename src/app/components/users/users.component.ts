@@ -14,7 +14,8 @@ import { TokenService } from '../../services/token.service'
 })
 export class UsersComponent implements OnInit {
 
-  users = null;     //Store API Data
+  users = null;     //Store Users Data
+  roles = null;     //Store all roles Data
   error = [];       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
@@ -25,13 +26,15 @@ export class UsersComponent implements OnInit {
   data = {          //User Update Data
     "id" : null,
     "name" : null,
+    "role" : []
   }
 
   form = {         //New User add Data
-    name : null,
-    email : null,
-    password : null,
-    password_confirmation : null,
+    'name' : null,
+    'email' : null,
+    'password' : null,
+    'password_confirmation' : null,
+    'role' : []
   }
 
   headers = {     //Token for API Authorization
@@ -51,15 +54,21 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
-    if(this.keyword)
+    if(this.keyword) {
       this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
-      ); else
+      );
+    } else {
       this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
       );
+    }
+    this.api.get('role', this.headers).subscribe(
+      data => { console.log(data); this.roles=data; },
+      error => { this.notify.clear(); this.notify.error(error.error.message); }
+    );
   }
 
   datahandler(data){
@@ -113,6 +122,7 @@ export class UsersComponent implements OnInit {
   edit(id){
     this.notify.clear();
     this.data.name = null;
+    this.data.role = [];
     this.api.get('users/'+id, this.headers).subscribe(
       data => this.editDataHandler(data),
       error => this.notify.error("User Not Found", {timeout: 0})
@@ -123,7 +133,20 @@ export class UsersComponent implements OnInit {
   }
 
   editDataHandler(data){
+    console.log(data);
     this.data.name = data.name;
+    for(var i=0; i<data.roles.length; i++)
+      this.data.role.push(data.roles[i].name);
+  }
+
+  checkbox(event){
+    if(event.srcElement.checked){
+      this.data.role.push(event.srcElement.name);
+    } else {
+      var index =this.data.role.indexOf(event.srcElement.name);
+      this.data.role.splice(index, index+1);
+    }
+    console.log(this.data.role);
   }
 
   editsubmit(){
@@ -177,9 +200,20 @@ export class UsersComponent implements OnInit {
     this.form.email = null;
     this.form.password = null;
     this.form.password_confirmation = null;
+    this.form.role = [];
 
     var modal = document.getElementById('addModal');
     modal.style.display = "block";
+  }
+
+  checkboxAdd(event){
+    if(event.srcElement.checked){
+      this.form.role.push(event.srcElement.name);
+    } else {
+      var index =this.form.role.indexOf(event.srcElement.name);
+      this.form.role.splice(index, index+1);
+    }
+    console.log(this.form.role);
   }
 
   addModalSubmit(){
