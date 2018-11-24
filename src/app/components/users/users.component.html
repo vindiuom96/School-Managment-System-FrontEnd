@@ -27,7 +27,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
-              <td><img src="{{ host + user.avatar_url }}" style="max-height: 40px;"></td>
+              <td><img src="{{ user.avatar_url }}" style="max-height: 40px;"></td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td *ngIf="user.active">Active</td>
