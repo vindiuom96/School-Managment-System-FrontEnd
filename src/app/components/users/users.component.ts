@@ -114,12 +114,16 @@ export class UsersComponent implements OnInit {
     this.notify.clear();
     this.data.name = null;
     this.api.get('users/'+id, this.headers).subscribe(
-      data => this.data.name = data.name,
+      data => this.editDataHandler(data),
       error => this.notify.error("User Not Found", {timeout: 0})
     );
     this.data.id = id;
     var modal = document.getElementById('editModal');
     modal.style.display = "block";
+  }
+
+  editDataHandler(data){
+    this.data.name = data.name;
   }
 
   editsubmit(){
