@@ -22,7 +22,6 @@ export class ResponseResetComponent implements OnInit {
 
   constructor(
     private api : ApiService,
-    private token : TokenService,
     private router : Router,
     private notify: SnotifyService,
     private route : ActivatedRoute

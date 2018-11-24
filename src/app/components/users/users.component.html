@@ -18,9 +18,9 @@
           <thead>
             <tr>
               <th>Avatar</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Active</th>
+              <th (click)="sort('name')"><a href="javascript:void(0)" style="color:black">Name <span *ngIf="sortData.col=='name'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
+              <th (click)="sort('email')"><a href="javascript:void(0)" style="color:black">Email <span *ngIf="sortData.col=='email'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
+              <th (click)="sort('active')"><a href="javascript:void(0)" style="color:black">Active <span *ngIf="sortData.col=='active'"><i class="fa fa-caret-down" *ngIf="sortData.order=='desc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='asc'"></i></span></a></th>
               <th>Action</th>
             </tr>
           </thead>
@@ -65,6 +65,12 @@
               </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" [hidden]="!error.role">
+                    {{ error.role }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.name">
+                      {{ error.name }}
+                    </div>
               <form #newUserForm=ngForm>
                 <div class="form-group">
                     <label for="name">Name</label>
