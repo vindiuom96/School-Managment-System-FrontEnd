@@ -38,7 +38,8 @@ export class UsersComponent implements OnInit {
   }
 
   headers = {     //Token for API Authorization
-    'Authorization' : this.token.get()
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
   }
 
   sortData = {        //Current Sort Data
