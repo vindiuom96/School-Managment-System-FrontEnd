@@ -11,8 +11,10 @@ import { TokenService } from '../../services/token.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  public loggedIn : boolean;
-  isCollapsed: Boolean = true;
+  private loggedIn : boolean;
+  private isCollapsed: Boolean = true;
+  private _opened: boolean = false;
+  //private prevdata = null;
 
   constructor(
     private auth : AuthService,
@@ -36,6 +38,32 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('/login');
     location.reload();
     this.notify.info("Logout Succesfully", {timeout:2000});
+  }
+
+  toggle(){
+    this._opened = !this._opened;
+  }
+
+  subtoggle(data){
+    console.log('clicked');
+    var t = document.getElementsByClassName(data);
+    //t[0].parentElement.className = t[0].parentElement.className.replace(/\bactive\b/g, "");
+    for(var i=0; i<t.length; i++){
+      var visibility = this.getElement(t[i]);
+      if(visibility == 'none')
+        this.changeDisplay(t[i], "block");
+      else
+      this.changeDisplay(t[i], "none");
+    }
+    //this.prevdata = data;
+  }
+
+  changeDisplay(element, data){
+    element.style.display = data
+  }
+
+  getElement(element){
+    return element.style.display;
   }
 
 }

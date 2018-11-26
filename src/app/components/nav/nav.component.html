@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="" *ngIf="!loggedIn">Role Managment</a>
-  <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn">Role Managment</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
-  data-target="#navbarsExampleDefault"
-    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+  <button class="btn btn-default navbar-btn yay-toggle navbar-toggler" *ngIf="loggedIn" (click)='toggle()' type="button" style="display: inline!important; margin-right: 10px!important"><i class="fa fa-bars"></i></button>
+  <a class="navbar-brand" routerLink="" *ngIf="!loggedIn">EMS</a>
+  <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn">EMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
@@ -13,11 +12,63 @@
       <a class="text-white" routerLink="login" style="padding-right: 20px;" *ngIf="!loggedIn">Login</a>
       <a class="text-white" routerLink="signup" style="padding-right: 20px;" *ngIf="!loggedIn">Register</a>
 
-      <a class="text-white" routerLink="users" style="padding-right: 20px;" *ngIf="loggedIn">Users</a>
-      <a class="text-white" routerLink="roles" style="padding-right: 20px;" *ngIf="loggedIn">Roles</a>
-      <a class="text-white" routerLink="permissions" style="padding-right: 20px;" *ngIf="loggedIn">Permissions</a>
       <a class="text-white" href="javascript:void(0)" (click)="logout($event)" style="padding-right: 20px;" *ngIf="loggedIn">Logout</a>
     </form>
   </div>
 </nav>
+
+<!--
+
+  Yay Sidebar
+
+  Options [you can use all of theme classnames]:
+
+    .yay-hide-to-small   - no hide menu, just set it small with big icons
+
+    .yay-static          - stop using fixed sidebar (will scroll with content)
+
+    .yay-gestures        - to show and hide menu using gesture swipes
+
+    .yay-light           - light color scheme
+
+    .yay-overlap-content - hide menu on content click
+
+
+
+  Effects [you can use one of these classnames]:
+
+    .yay-overlay  - overlay content
+
+    .yay-push     - push content to right
+
+    .yay-shrink   - shrink content width
+
+-->
+
+<div class="yaybar yay-hide-to-small yay-push yay-gestures" *ngIf="_opened && loggedIn">
+    <div class="nano">
+      <div class="nano-content">
+        <ul>
+          <li class="sidenav-content label">Menu</li>
+
+          <li class="active">
+            <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
+            <ul class="sidenav-content">
+              <li>
+                  <a class="sub-users" routerLink="users" style="display: none">Users</a>
+                  <a class="sub-users" routerLink="roles" style="display: none">Roles</a>
+                  <a class="sub-users" routerLink="permissions" style="display: none">Permissions</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a routerLink="attendance"><i class="fa fa-book"></i>Attendance Managment</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Yay Sidebar -->
 

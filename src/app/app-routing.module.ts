@@ -14,6 +14,7 @@ import { ResponseResetComponent } from './components/password/response-reset/res
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { PermissionsComponent } from './components/permissions/permissions.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
 
 const appRoutes: Routes = [
   {
@@ -68,6 +69,11 @@ const appRoutes: Routes = [
   {
     path: 'permissions',
     component: PermissionsComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'attendance',
+    component: AttendanceComponent,
     canActivate : [AfterloginService]
   }
 ];

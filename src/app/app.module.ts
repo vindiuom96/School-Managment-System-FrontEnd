@@ -22,7 +22,7 @@ import { UsersComponent } from './components/users/users.component';
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { PermissionsComponent } from './components/permissions/permissions.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     SignupConfrimComponent,
     RolesComponent,
     PermissionsComponent,
-    SidenavComponent
+    AttendanceComponent
   ],
   imports: [
     BrowserModule,
