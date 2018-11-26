@@ -44,31 +44,31 @@
     .yay-shrink   - shrink content width
 
 -->
+<div style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999; background-color: gray; opacity: 0.6;" (click)='toggle()' *ngIf="_opened && loggedIn"></div>
+  <div class="yaybar yay-hide-to-small yay-push yay-gestures" *ngIf="_opened && loggedIn" style="z-index: 1000;">
+      <div class="nano">
+        <div class="nano-content">
+          <ul>
+            <li class="sidenav-content label">Menu</li>
 
-<div class="yaybar yay-hide-to-small yay-push yay-gestures" *ngIf="_opened && loggedIn">
-    <div class="nano">
-      <div class="nano-content">
-        <ul>
-          <li class="sidenav-content label">Menu</li>
+            <li class="active">
+              <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
+              <ul class="sidenav-content">
+                <li>
+                    <a class="sub-users" routerLink="users" style="display: none">Users</a>
+                    <a class="sub-users" routerLink="roles" style="display: none">Roles</a>
+                    <a class="sub-users" routerLink="permissions" style="display: none">Permissions</a>
+                </li>
+              </ul>
+            </li>
 
-          <li class="active">
-            <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
-            <ul class="sidenav-content">
-              <li>
-                  <a class="sub-users" routerLink="users" style="display: none">Users</a>
-                  <a class="sub-users" routerLink="roles" style="display: none">Roles</a>
-                  <a class="sub-users" routerLink="permissions" style="display: none">Permissions</a>
-              </li>
-            </ul>
-          </li>
+            <li>
+              <a routerLink="attendance"><i class="fa fa-book"></i>Attendance Managment</a>
+            </li>
 
-          <li>
-            <a routerLink="attendance"><i class="fa fa-book"></i>Attendance Managment</a>
-          </li>
-
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- /Yay Sidebar -->
+    <!-- /Yay Sidebar -->
 
