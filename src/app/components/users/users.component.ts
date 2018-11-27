@@ -16,7 +16,14 @@ export class UsersComponent implements OnInit {
 
   users = null;     //Store Users Data
   roles = null;     //Store all roles Data
-  error = [];       //Form errors
+
+  public error = {
+    'role' : null,
+    'email' : null,
+    'name' : null,
+    'password' : null
+  };
+       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
     'page' :  '1',
@@ -177,7 +184,12 @@ export class UsersComponent implements OnInit {
   }
 
   closeEditModal(){
-    this.error = [];
+    this.error = {
+      'role' : null,
+      'email' : null,
+      'name' : null,
+      'password' : null
+    };
     var modal = document.getElementById('editModal');
     modal.style.display = "none";
   }
@@ -245,7 +257,12 @@ export class UsersComponent implements OnInit {
   }
 
   closeAddModal(){
-    this.error = [];
+    this.error = {
+      'role' : null,
+      'email' : null,
+      'name' : null,
+      'password' : null
+    };
     var modal = document.getElementById('addModal');
     modal.style.display = "none";
   }

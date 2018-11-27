@@ -11,9 +11,9 @@ import { TokenService } from '../../services/token.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  private loggedIn : boolean;
-  private isCollapsed: Boolean = true;
-  private _opened: boolean = false;
+  loggedIn : boolean;
+  isCollapsed: Boolean = true;
+  _opened: boolean = false;
   //private prevdata = null;
 
   constructor(
