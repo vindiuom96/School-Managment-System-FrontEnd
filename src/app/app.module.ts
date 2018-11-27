@@ -23,6 +23,9 @@ import { SignupConfrimComponent } from './components/signup-confrim/signup-confr
 import { RolesComponent } from './components/roles/roles.component';
 import { PermissionsComponent } from './components/permissions/permissions.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { LocationMapComponent } from './components/location-map/location-map.component';
+import { LocationComponent } from './components/location/location.component';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
     SignupConfrimComponent,
     RolesComponent,
     PermissionsComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    LocationMapComponent,
+    LocationComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,8 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
     AfterloginService,
     BeforeloginService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
+    SnotifyService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })

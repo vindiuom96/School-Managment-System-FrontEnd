@@ -55,15 +55,19 @@
               <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
               <ul class="sidenav-content">
                 <li>
-                    <a class="sub-users" routerLink="users" style="display: none">Users</a>
-                    <a class="sub-users" routerLink="roles" style="display: none">Roles</a>
-                    <a class="sub-users" routerLink="permissions" style="display: none">Permissions</a>
+                    <a class="sub-users" routerLink="/users" style="display: none">Users</a>
+                    <a class="sub-users" routerLink="/roles" style="display: none">Roles</a>
+                    <a class="sub-users" routerLink="/permissions" style="display: none">Permissions</a>
                 </li>
               </ul>
             </li>
 
             <li>
-              <a routerLink="attendance"><i class="fa fa-book"></i>Attendance Managment</a>
+                <a routerLink="/location"><i class="fa fa-map-marker"></i>Student Location</a>
+            </li>
+
+            <li>
+              <a routerLink="/attendance"><i class="fa fa-book"></i>Attendance Managment</a>
             </li>
 
           </ul>

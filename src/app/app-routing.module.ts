@@ -15,6 +15,8 @@ import { SignupConfrimComponent } from './components/signup-confrim/signup-confr
 import { RolesComponent } from './components/roles/roles.component';
 import { PermissionsComponent } from './components/permissions/permissions.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { LocationMapComponent } from './components/location-map/location-map.component';
+import { LocationComponent } from './components/location/location.component';
 
 const appRoutes: Routes = [
   {
@@ -74,6 +76,16 @@ const appRoutes: Routes = [
   {
     path: 'attendance',
     component: AttendanceComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'location',
+    component: LocationComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'locationMap',
+    component: LocationMapComponent,
     canActivate : [AfterloginService]
   }
 ];
