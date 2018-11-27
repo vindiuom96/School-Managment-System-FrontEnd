@@ -13,12 +13,28 @@ export class TokenService {
   }
 
   setRoles(roles){
-    localStorage.setItem('roles', JSON.stringify(roles));
+    if(roles){
+      var data = [roles[0].name];
+      for(var i=1; i<roles.length; i++){
+        data.push(roles[i].name);
+      }
+      localStorage.setItem('roles', JSON.stringify(data));
+    } else {
+      localStorage.setItem('roles', '');
+    }
   }
 
-  checkRoles(role){
-    let roles = [];
-    //roles = localStorage.getItem('roles');
+  checkRole(role : string){
+    let roles = JSON.parse(localStorage.getItem('roles'));
+    for(var i=0; i<roles.length; i++){
+      if(roles[i]==role)
+        return true;
+      return false;
+    }
+  }
+
+  getRoles(){
+    return JSON.parse(localStorage.getItem('roles'));
   }
 
   get(){
@@ -27,6 +43,7 @@ export class TokenService {
 
   remove(){
     localStorage.removeItem('token');
+    localStorage.removeItem('roles');
   }
 
   loggedIn(){

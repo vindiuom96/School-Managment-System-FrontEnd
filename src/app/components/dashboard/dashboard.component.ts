@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  isAdmin = false;
+  isTeacher = false;
+  isStudent = false;
+  isParent = false;
+
+  constructor(private role : RolesCheckService) { }
 
   ngOnInit() {
+    this.isAdmin = this.role.isAdmin;
+    this.isTeacher = this.role.isTeacher;
+    this.isStudent = this.role.isStudent;
+    this.isParent = this.role.isParent;
   }
 
 }

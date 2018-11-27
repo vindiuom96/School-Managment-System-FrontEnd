@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row" style="margin-top: 30px;">
     <div class="col-6">
-      <h3>Users</h3>
+      <h3>{{ User }}s</h3>
     </div>
     <div class="col-md-3 col-6 text-right">
-      <a class="text-white btn btn-info" (click)='add()'>Add New User</a>
+      <a class="text-white btn btn-info" (click)='add()'>Add New {{ User }}</a>
     </div>
     <div class="col-md-3 text-right">
       <input type="search" class="form-control" id="search" name="search" placeholder="Search"  [(ngModel)]="keyword" (keyup)="search()"/>
@@ -104,7 +104,7 @@
       <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Add New User</h5>
+              <h5 class="modal-title">Add New {{ User }}</h5>
               <button type="button" class="close" (click)='closeAddModal()'>
                 <span aria-hidden="true">&times;</span>
               </button>

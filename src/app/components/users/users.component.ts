@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import { SnotifyService } from 'ng-snotify';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { TokenService } from '../../services/token.service'
@@ -22,6 +22,8 @@ export class UsersComponent implements OnInit {
     'page' :  '1',
     'max' : '10'
   }
+  role = null;
+  User = 'User';
 
   data = {          //User Update Data
     "id" : null,
@@ -47,21 +49,31 @@ export class UsersComponent implements OnInit {
     "order" : null
   }
 
-  constructor(private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  constructor(private route : ActivatedRoute, private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
     pg.boundaryLinks = true;
     pg.rotate = true;
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if(params['role']){
+        this.role = params['role'];
+        this.User = this.role;
+      } else {
+        this.User = 'User';
+        this.role = '';
+      }
+    })
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
+
     if(this.keyword) {
-      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
       );
     } else {
-      this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
       );

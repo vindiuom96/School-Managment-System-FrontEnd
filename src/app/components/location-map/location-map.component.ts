@@ -26,7 +26,6 @@ export class LocationMapComponent implements OnInit {
   constructor(private data : DataService, private api : ApiService, private token : TokenService, private notify :SnotifyService) { }
 
   ngOnInit() {
-    var google : any;
     this.data.currentMessage.subscribe(data =>  {
       console.log(data);
       if(data){
@@ -50,7 +49,6 @@ export class LocationMapComponent implements OnInit {
   }
 
   updateMap(map, mapProp){
-    var google : any;
     this.data.currentMessage.subscribe(data =>  {
       if(data){
         this.api.get('location/'+data , this.headers).subscribe(
