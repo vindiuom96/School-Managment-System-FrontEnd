@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
     this.notify.clear();
     console.log(data);
     this.token.set(data.token_type + " " + data.access_token);
+    this.token.setRoles(data.user.roles);
     this.auth.changeAuthStatus(true);
     this.router.navigateByUrl('/dashboard');
     this.notify.info("Login Succesfully", {timeout:2000});

@@ -6,15 +6,19 @@ import { ApiService } from './api.service';
 })
 export class TokenService {
 
-  private iss = {
-    login : this.api.baseURL + 'login',
-    signup : this.api.baseURL + 'signup'
-  }
   constructor( private api : ApiService ) { }
 
   set(token){
     localStorage.setItem('token', token);
-    //localStorage.setItem('user', JSON.stringify(token.user));
+  }
+
+  setRoles(roles){
+    localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  checkRoles(role){
+    let roles = [];
+    //roles = localStorage.getItem('roles');
   }
 
   get(){
