@@ -1,5 +1,6 @@
+/// <reference types="@types/googlemaps" />
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { } from '@types/googlemaps';
+
 import { DataService } from 'src/app/services/data.service';
 import { ApiService } from 'src/app/services/api.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -25,6 +26,7 @@ export class LocationMapComponent implements OnInit {
   constructor(private data : DataService, private api : ApiService, private token : TokenService, private notify :SnotifyService) { }
 
   ngOnInit() {
+    var google : any;
     this.data.currentMessage.subscribe(data =>  {
       console.log(data);
       if(data){
@@ -48,6 +50,7 @@ export class LocationMapComponent implements OnInit {
   }
 
   updateMap(map, mapProp){
+    var google : any;
     this.data.currentMessage.subscribe(data =>  {
       if(data){
         this.api.get('location/'+data , this.headers).subscribe(
