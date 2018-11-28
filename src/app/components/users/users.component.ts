@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { TokenService } from '../../services/token.service'
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 @Component({
   selector: 'app-users',
@@ -56,12 +57,19 @@ export class UsersComponent implements OnInit {
     "order" : null
   }
 
-  constructor(private route : ActivatedRoute, private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  isAdmin = false;
+
+  constructor(private roleManage : RolesCheckService , private route : ActivatedRoute, private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
     pg.boundaryLinks = true;
     pg.rotate = true;
   }
 
   ngOnInit() {
+    this.isAdmin = this.roleManage.isAdmin;
+    if(!this.isAdmin){
+      this.notify.error("Permission Denited");
+      this.router.navigateByUrl("/dashboard");
+    }
     this.route.queryParams.subscribe(params => {
       if(params['role']){
         this.role = params['role'];
