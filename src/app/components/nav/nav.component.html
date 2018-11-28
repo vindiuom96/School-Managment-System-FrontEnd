@@ -51,7 +51,7 @@
           <ul>
             <li class="sidenav-content label">Menu</li>
 
-            <li class="active">
+            <li class="active" *ngIf="isAdmin">
               <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
               <ul class="sidenav-content">
                 <li>
@@ -62,7 +62,7 @@
               </ul>
             </li>
 
-            <li>
+            <li *ngIf="isAdmin||isTeacher||isParent">
                 <a routerLink="/location"><i class="fa fa-map-marker"></i>Student Location</a>
             </li>
 

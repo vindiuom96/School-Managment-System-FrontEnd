@@ -26,6 +26,8 @@ export class TokenService {
 
   checkRole(role : string){
     let roles = JSON.parse(localStorage.getItem('roles'));
+    if(!roles)
+      return false;
     for(var i=0; i<roles.length; i++){
       if(roles[i]==role)
         return true;

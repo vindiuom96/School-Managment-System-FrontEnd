@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,13 @@ export class NavComponent implements OnInit {
   _opened: boolean = false;
   //private prevdata = null;
 
+  isAdmin = false;
+  isTeacher = false;
+  isStudent = false;
+  isParent = false;
+
   constructor(
+    private role : RolesCheckService,
     private auth : AuthService,
     private router : Router,
     private token : TokenService,
@@ -24,6 +31,10 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAdmin = this.role.isAdmin;
+    this.isTeacher = this.role.isTeacher;
+    this.isStudent = this.role.isStudent;
+    this.isParent = this.role.isParent;
     this.auth.authStatus.subscribe(
       value => this.loggedIn = value
     );
