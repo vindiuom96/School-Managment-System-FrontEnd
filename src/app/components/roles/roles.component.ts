@@ -16,7 +16,9 @@ export class RolesComponent implements OnInit {
 
   roles = null;     //Store API Data
   permissions = null;     //Store all permissions Data
-  error = [];       //Form errors
+  error = {
+    'name' : null
+  };       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
     'page' :  '1',
@@ -35,7 +37,8 @@ export class RolesComponent implements OnInit {
   }
 
   headers = {     //Token for API Authorization
-    'Authorization' : this.token.get()
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
   }
 
   sortData = {        //Current Sort Data
@@ -145,7 +148,9 @@ export class RolesComponent implements OnInit {
   }
 
   closeEditModal(){
-    this.error = [];
+    this.error = {
+      'name' : null
+    };
     var modal = document.getElementById('editModal');
     modal.style.display = "none";
   }
@@ -208,7 +213,9 @@ export class RolesComponent implements OnInit {
   }
 
   closeAddModal(){
-    this.error = [];
+    this.error = {
+      'name' : null
+    };
     var modal = document.getElementById('addModal');
     modal.style.display = "none";
   }

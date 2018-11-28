@@ -14,17 +14,14 @@ import { ResponseResetComponent } from './components/password/response-reset/res
 import { SignupConfrimComponent } from './components/signup-confrim/signup-confrim.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { PermissionsComponent } from './components/permissions/permissions.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
+import { LocationMapComponent } from './components/location-map/location-map.component';
+import { LocationComponent } from './components/location/location.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    canActivate : [BeforeloginService]
-  },
-  {
-    path: '',
-    component: DashboardComponent,
-    canActivate : [AfterloginService]
+    component: HomeComponent
   },
   {
     path: 'login',
@@ -68,6 +65,21 @@ const appRoutes: Routes = [
   {
     path: 'permissions',
     component: PermissionsComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'attendance',
+    component: AttendanceComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'location',
+    component: LocationComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'locationMap',
+    component: LocationMapComponent,
     canActivate : [AfterloginService]
   }
 ];

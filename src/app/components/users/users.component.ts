@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import { SnotifyService } from 'ng-snotify';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { TokenService } from '../../services/token.service'
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 @Component({
   selector: 'app-users',
@@ -16,12 +17,21 @@ export class UsersComponent implements OnInit {
 
   users = null;     //Store Users Data
   roles = null;     //Store all roles Data
-  error = [];       //Form errors
+
+  public error = {
+    'role' : null,
+    'email' : null,
+    'name' : null,
+    'password' : null
+  };
+       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
     'page' :  '1',
     'max' : '10'
   }
+  role = null;
+  User = 'User';
 
   data = {          //User Update Data
     "id" : null,
@@ -38,7 +48,8 @@ export class UsersComponent implements OnInit {
   }
 
   headers = {     //Token for API Authorization
-    'Authorization' : this.token.get()
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
   }
 
   sortData = {        //Current Sort Data
@@ -46,21 +57,38 @@ export class UsersComponent implements OnInit {
     "order" : null
   }
 
-  constructor(private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  isAdmin = false;
+
+  constructor(private roleManage : RolesCheckService , private route : ActivatedRoute, private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
     pg.boundaryLinks = true;
     pg.rotate = true;
   }
 
   ngOnInit() {
+    this.isAdmin = this.roleManage.isAdmin;
+    if(!this.isAdmin){
+      this.notify.error("Permission Denited");
+      this.router.navigateByUrl("/dashboard");
+    }
+    this.route.queryParams.subscribe(params => {
+      if(params['role']){
+        this.role = params['role'];
+        this.User = this.role;
+      } else {
+        this.User = 'User';
+        this.role = '';
+      }
+    })
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
+
     if(this.keyword) {
-      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
       );
     } else {
-      this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
+      this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
       );
@@ -164,7 +192,12 @@ export class UsersComponent implements OnInit {
   }
 
   closeEditModal(){
-    this.error = [];
+    this.error = {
+      'role' : null,
+      'email' : null,
+      'name' : null,
+      'password' : null
+    };
     var modal = document.getElementById('editModal');
     modal.style.display = "none";
   }
@@ -232,7 +265,12 @@ export class UsersComponent implements OnInit {
   }
 
   closeAddModal(){
-    this.error = [];
+    this.error = {
+      'role' : null,
+      'email' : null,
+      'name' : null,
+      'password' : null
+    };
     var modal = document.getElementById('addModal');
     modal.style.display = "none";
   }

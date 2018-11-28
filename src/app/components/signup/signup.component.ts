@@ -20,7 +20,12 @@ export class SignupComponent implements OnInit {
     // role : null
   };
 
-  public error = [];
+  public error = {
+    'role' : null,
+    'email' : null,
+    'name' : null,
+    'password' : null
+  };
 
   constructor(
     private api : ApiService,

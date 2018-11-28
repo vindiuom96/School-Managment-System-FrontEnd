@@ -15,7 +15,9 @@ import { TokenService } from '../../services/token.service'
 export class PermissionsComponent implements OnInit {
 
   permissions = null;     //Store API Data
-  error = [];       //Form errors
+  error = {
+    'name' : null
+  };       //Form errors
   keyword = null;   //Current Search Keyword
   pagination = {    //Current Pagination data
     'page' :  '1',
@@ -32,7 +34,8 @@ export class PermissionsComponent implements OnInit {
   }
 
   headers = {     //Token for API Authorization
-    'Authorization' : this.token.get()
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
   }
 
   sortData = {        //Current Sort Data
@@ -125,7 +128,9 @@ export class PermissionsComponent implements OnInit {
   }
 
   closeEditModal(){
-    this.error = [];
+    this.error = {
+      'name' : null
+    };
     var modal = document.getElementById('editModal');
     modal.style.display = "none";
   }
@@ -177,7 +182,9 @@ export class PermissionsComponent implements OnInit {
   }
 
   closeAddModal(){
-    this.error = [];
+    this.error = {
+      'name' : null
+    };
     var modal = document.getElementById('addModal');
     modal.style.display = "none";
   }

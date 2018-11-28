@@ -6,15 +6,37 @@ import { ApiService } from './api.service';
 })
 export class TokenService {
 
-  private iss = {
-    login : this.api.baseURL + 'login',
-    signup : this.api.baseURL + 'signup'
-  }
   constructor( private api : ApiService ) { }
 
   set(token){
     localStorage.setItem('token', token);
-    //localStorage.setItem('user', JSON.stringify(token.user));
+  }
+
+  setRoles(roles){
+    if(roles){
+      var data = [roles[0].name];
+      for(var i=1; i<roles.length; i++){
+        data.push(roles[i].name);
+      }
+      localStorage.setItem('roles', JSON.stringify(data));
+    } else {
+      localStorage.setItem('roles', '');
+    }
+  }
+
+  checkRole(role : string){
+    let roles = JSON.parse(localStorage.getItem('roles'));
+    if(!roles)
+      return false;
+    for(var i=0; i<roles.length; i++){
+      if(roles[i]==role)
+        return true;
+      return false;
+    }
+  }
+
+  getRoles(){
+    return JSON.parse(localStorage.getItem('roles'));
   }
 
   get(){
@@ -23,6 +45,7 @@ export class TokenService {
 
   remove(){
     localStorage.removeItem('token');
+    localStorage.removeItem('roles');
   }
 
   loggedIn(){
