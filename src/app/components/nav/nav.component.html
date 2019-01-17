@@ -1,78 +1,246 @@
-<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-  <button class="btn btn-default navbar-btn yay-toggle navbar-toggler" *ngIf="loggedIn" (click)='toggle()' type="button" style="display: inline!important; margin-right: 10px!important"><i class="fa fa-bars"></i></button>
-  <a class="navbar-brand" routerLink="" *ngIf="!loggedIn">EMS</a>
-  <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn">EMS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <a class="text-white" routerLink="login" style="padding-right: 20px;" *ngIf="!loggedIn">Login</a>
-      <a class="text-white" routerLink="signup" style="padding-right: 20px;" *ngIf="!loggedIn">Register</a>
+<header class="topbar">
+  <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+      <div class="navbar-header">
+          <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+              <i class="ti-menu ti-close"></i>
+          </a>
 
-      <a class="text-white" href="javascript:void(0)" (click)="logout($event)" style="padding-right: 20px;" *ngIf="loggedIn">Logout</a>
-    </form>
-  </div>
-</nav> -->
+          <a class="navbar-brand" href="/">
+              <b class="logo-icon">
+                  <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+              </b>
+              <span class="logo-text">
+                  <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+              </span>
+          </a>
 
-<!--
-
-  Yay Sidebar
-
-  Options [you can use all of theme classnames]:
-
-    .yay-hide-to-small   - no hide menu, just set it small with big icons
-
-    .yay-static          - stop using fixed sidebar (will scroll with content)
-
-    .yay-gestures        - to show and hide menu using gesture swipes
-
-    .yay-light           - light color scheme
-
-    .yay-overlap-content - hide menu on content click
+          <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="ti-more"></i>
+          </a>
+      </div>
 
 
+      <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background: #333d54;">
+          <!-- ============================================================== -->
+          <!-- toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav float-left mr-auto">
+              <li class="nav-item d-none d-md-block">
+                  <a class="nav-link sidebartoggler waves-effect waves-light" style="color: #ddd;" href="javascript:void(0)" data-sidebartype="mini-sidebar">
+                      <i class="sl-icon-menu font-20"  *ngIf="loggedIn"></i>
+                  </a>
+              </li>
 
-  Effects [you can use one of these classnames]:
-
-    .yay-overlay  - overlay content
-
-    .yay-push     - push content to right
-
-    .yay-shrink   - shrink content width
-
--->
-<div style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999; background-color: gray; opacity: 0.6;" (click)='toggle()' *ngIf="_opened && loggedIn"></div>
-  <div class="yaybar yay-hide-to-small yay-push yay-gestures" *ngIf="_opened && loggedIn" style="z-index: 1000;">
-      <div class="nano">
-        <div class="nano-content">
-          <ul>
-            <li class="sidenav-content label">Menu</li>
-
-            <li class="active" *ngIf="isAdmin">
-              <a (click)="subtoggle('sub-users')"><i class="fa fa-indent"></i>Users Managment<span class="badge"> 7 </span><span class="yay-collapse-icon fa fa-angle-down sidenav-content"></span></a>
-              <ul class="sidenav-content">
-                <li>
-                    <a class="sub-users" routerLink="/users" style="display: none">Users</a>
-                    <a class="sub-users" routerLink="/roles" style="display: none">Roles</a>
-                    <a class="sub-users" routerLink="/permissions" style="display: none">Permissions</a>
-                </li>
-              </ul>
-            </li>
-
-            <li *ngIf="isAdmin||isTeacher||isParent">
-                <a routerLink="/location"><i class="fa fa-map-marker"></i>Student Location</a>
-            </li>
-
-            <li>
-              <a routerLink="/attendance"><i class="fa fa-book"></i>Attendance Managment</a>
-            </li>
 
           </ul>
-        </div>
-      </div>
-    </div>
-    <!-- /Yay Sidebar -->
+          <!-- ============================================================== -->
+          <!-- Right side toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav float-right" *ngIf="loggedIn">
+              <!-- ============================================================== -->
+              <!-- Notifications -->
+              <!-- ============================================================== -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="ti-bell font-20"></i>
 
+                  </a>
+                  <div class="dropdown-menu mailbox animated bounceInDown">
+                      <span class="with-arrow">
+                          <span class="bg-primary"></span>
+                      </span>
+                      <ul class="list-style-none">
+                          <li>
+                              <div class="drop-title bg-primary text-white">
+                                  <h4 class="m-b-0 m-t-5">4 New</h4>
+                                  <span class="font-light">Notifications</span>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="message-center notifications">
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="btn btn-danger btn-circle">
+                                          <i class="fa fa-link"></i>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Luanch Admin</h5>
+                                          <span class="mail-desc">Just see the my new admin!</span>
+                                          <span class="time">9:30 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="btn btn-success btn-circle">
+                                          <i class="ti-calendar"></i>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Event today</h5>
+                                          <span class="mail-desc">Just a reminder that you have event</span>
+                                          <span class="time">9:10 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="btn btn-info btn-circle">
+                                          <i class="ti-settings"></i>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Settings</h5>
+                                          <span class="mail-desc">You can customize this template as you want</span>
+                                          <span class="time">9:08 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="btn btn-primary btn-circle">
+                                          <i class="ti-user"></i>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Pavan kumar</h5>
+                                          <span class="mail-desc">Just see the my admin!</span>
+                                          <span class="time">9:02 AM</span>
+                                      </div>
+                                  </a>
+                              </div>
+                          </li>
+                          <li>
+                              <a class="nav-link text-center m-b-5" href="javascript:void(0);">
+                                  <strong>Check all notifications</strong>
+                                  <i class="fa fa-angle-right"></i>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <!-- ============================================================== -->
+              <!-- End Notifications -->
+              <!-- ============================================================== -->
+              <!-- ============================================================== -->
+              <!-- Messages -->
+              <!-- ============================================================== -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd;" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="font-20 ti-email"></i>
+
+                  </a>
+                  <div class="dropdown-menu mailbox animated bounceInDown" aria-labelledby="2">
+                      <span class="with-arrow">
+                          <span class="bg-danger"></span>
+                      </span>
+                      <ul class="list-style-none">
+                          <li>
+                              <div class="drop-title bg-danger text-white">
+                                  <h4 class="m-b-0 m-t-5">5 New</h4>
+                                  <span class="font-light">Messages</span>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="message-center message-body">
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="user-img">
+                                          <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle">
+                                          <span class="profile-status online pull-right"></span>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Pavan kumar</h5>
+                                          <span class="mail-desc">Just see the my admin!</span>
+                                          <span class="time">9:30 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="user-img">
+                                          <img src="assets/images/users/2.jpg" alt="user" class="rounded-circle">
+                                          <span class="profile-status busy pull-right"></span>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Sonu Nigam</h5>
+                                          <span class="mail-desc">I've sung a song! See you at</span>
+                                          <span class="time">9:10 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="user-img">
+                                          <img src="assets/images/users/3.jpg" alt="user" class="rounded-circle">
+                                          <span class="profile-status away pull-right"></span>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Arijit Sinh</h5>
+                                          <span class="mail-desc">I am a singer!</span>
+                                          <span class="time">9:08 AM</span>
+                                      </div>
+                                  </a>
+                                  <!-- Message -->
+                                  <a href="javascript:void(0)" class="message-item">
+                                      <span class="user-img">
+                                          <img src="assets/images/users/4.jpg" alt="user" class="rounded-circle">
+                                          <span class="profile-status offline pull-right"></span>
+                                      </span>
+                                      <div class="mail-contnet">
+                                          <h5 class="message-title">Pavan kumar</h5>
+                                          <span class="mail-desc">Just see the my admin!</span>
+                                          <span class="time">9:02 AM</span>
+                                      </div>
+                                  </a>
+                              </div>
+                          </li>
+                          <li>
+                              <a class="nav-link text-center link" href="javascript:void(0);">
+                                  <b>See all e-Mails</b>
+                                  <i class="fa fa-angle-right"></i>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <!-- ============================================================== -->
+              <!-- End Messages -->
+              <!-- ============================================================== -->
+
+
+              <!-- ============================================================== -->
+              <!-- User profile -->
+              <!-- ============================================================== -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                      <span class="with-arrow">
+                          <span class="bg-primary"></span>
+                      </span>
+                      <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                          <div class="">
+                              <img src="assets/images/users/1.jpg" alt="user" class="img-circle" width="60">
+                          </div>
+                          <div class="m-l-10">
+                              <h4 class="m-b-0">Steave Jobs</h4>
+                              <p class=" m-b-0">varun@gmail.com</p>
+                          </div>
+                      </div>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                          <i class="ti-user m-r-5 m-l-5"></i> Profile</a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                          <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="logout()">
+                          <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                  </div>
+              </li>
+              <!-- ============================================================== -->
+              <!-- User profile-->
+              <!-- ============================================================== -->
+          </ul>
+          <ul class="navbar-nav float-right" *ngIf="!loggedIn">
+            <li class="nav-item">
+                <a class="nav-link text-white pr-4" style="font-size: 20px" routerLink="/login">Login</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</header>

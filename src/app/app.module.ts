@@ -26,6 +26,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { LocationMapComponent } from './components/location-map/location-map.component';
 import { LocationComponent } from './components/location/location.component';
 import { DataService } from './services/data.service';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DataService } from './services/data.service';
     PermissionsComponent,
     AttendanceComponent,
     LocationMapComponent,
-    LocationComponent
+    LocationComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
     this.auth.changeAuthStatus(true);
     this.router.navigateByUrl('/dashboard');
     this.notify.info("Login Succesfully", {timeout:2000});
+    window.location.reload();
   }
 
 }
