@@ -35,6 +35,11 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = {
+      'name' : null,
+      'email' : null,
+      'img' : null
+    };
     this.isAdmin = this.role.isAdmin;
     this.isTeacher = this.role.isTeacher;
     this.isStudent = this.role.isStudent;

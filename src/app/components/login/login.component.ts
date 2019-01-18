@@ -4,8 +4,6 @@ import { TokenService } from '../../services/token.service';
 import { Router, Route } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SnotifyService } from 'ng-snotify';
-import { HttpHeaders } from '@angular/common/http';
-import { SliderComponent } from '../slider/slider.component';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +31,8 @@ export class LoginComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    if(this.token.loggedIn)
+      this.router.navigateByUrl('/dashboard');
   }
 
   onSubmit(){
@@ -64,13 +64,22 @@ export class LoginComponent implements OnInit {
   tokenHandler(data){
     this.notify.clear();
     console.log(data);
-    this.token.set(data.token_type + " " + data.access_token);
+    this.token.set(data.token_type + " " + data.access_token, data);
     this.token.setRoles(data.user.roles);
     this.auth.changeAuthStatus(true);
     this.loggedIn = true;
-    this.router.navigateByUrl('/dashboard');
     this.notify.info("Login Succesfully", {timeout:2000});
+    this.wait(999);
+    this.router.navigateByUrl('/dashboard');
     //window.location.reload();
+  }
+
+  private wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+    }
   }
 
 }

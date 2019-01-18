@@ -18,20 +18,17 @@ export class TokenService {
   };
 
   constructor( private api : ApiService ) { }
-
-  private dataHandler(data){
-    this.user.name = data.name;
-    this.user.email = data.email;
-    this.user.img = this.api.host + data.avatar_url;
-    localStorage.setItem('user', JSON.stringify(this.user))
-  }
-
-  set(token){
+  set(token, data){
+    this.user = {
+      'name' : null,
+      'email' : null,
+      'img' : null
+    };
     localStorage.setItem('token', token);
-    this.api.get('auth/user', this.header).subscribe(
-      data => { this.dataHandler(data) },
-      error => { console.log(error) }
-    );
+    this.user.name = data.user.name;
+    this.user.email = data.user.email;
+    this.user.img = this.api.host + data.user.avatar_url;
+    localStorage.setItem('user', JSON.stringify(this.user))
   }
 
   setRoles(roles){

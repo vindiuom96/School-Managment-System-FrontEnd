@@ -21,12 +21,11 @@ import { LocationComponent } from './components/location/location.component';
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: LoginComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate : [BeforeloginService]
+    component: LoginComponent
   },
   {
     path: 'dashboard',

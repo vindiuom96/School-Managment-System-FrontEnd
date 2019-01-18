@@ -1,26 +1,25 @@
 <div class="bg-gradient-primary">
-  <div class="header pb-8 pt-5">
+  <div class="header pb-8">
     <div class="container-fluid">
       <div class="header-body">
         <!-- Card stats -->
-        <div class="row">
+        <div class="row pt-5" *ngIf="isAdmin || isTeacher">
           <div class="col-xl-3 col-md-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Students</h5>
                     <span class="h2 font-weight-bold mb-0">350,897</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                      <i class="fas fa-chart-bar"></i>
+                      <i class="fas fa-graduation-cap"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                  <span class="text-nowrap">Since last month</span>
+                  <a [routerLink]="['/users']" [queryParams]="{role: 'Student'}"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
                 </p>
               </div>
             </div>
@@ -30,18 +29,17 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
                   </div>
                   <div class="col-auto">
-                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                      <i class="fas fa-chart-pie"></i>
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-chalkboard-teacher"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                  <span class="text-nowrap">Since last week</span>
+                  <a [routerLink]="['/users']" [queryParams]="{role: 'Teacher'}"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
                 </p>
               </div>
             </div>
@@ -51,18 +49,99 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                    <span class="h2 font-weight-bold mb-0">924</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Parents</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
                   </div>
                   <div class="col-auto">
-                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-user"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/users']" [queryParams]="{role: 'Parent'}"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">School Fees</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-wallet"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/fees']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Subjects</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-book"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/subjects']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Streams</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-network-wired"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/streams']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Classes</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
                       <i class="fas fa-users"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                  <span class="text-nowrap">Since yesterday</span>
+                  <a [routerLink]="['/classes']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
                 </p>
               </div>
             </div>
@@ -72,18 +151,99 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                    <span class="h2 font-weight-bold mb-0">49,65%</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Attendance</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
                   </div>
                   <div class="col-auto">
-                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                      <i class="fas fa-percent"></i>
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-calendar-check"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                  <span class="text-nowrap">Since last month</span>
+                  <a [routerLink]="['/attendance']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Timetables</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/timetables']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Notices</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-bullhorn"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/notices']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Exam Results</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/results']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Student Location</h5>
+                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-location-arrow"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <a [routerLink]="['/location']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
                 </p>
               </div>
             </div>

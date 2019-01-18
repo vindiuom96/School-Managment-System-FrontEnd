@@ -23,8 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/css/yay.min.css"
+              "src/styles.css"
             ],
             "scripts": [
             ]

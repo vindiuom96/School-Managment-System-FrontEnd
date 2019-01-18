@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '../node_modules/ng-snotify/styles/material.css';
+@import 'assets/css/argon2.css';
 
 .modal {
   overflow-y: scroll;
