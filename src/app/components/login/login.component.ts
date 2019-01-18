@@ -5,6 +5,7 @@ import { Router, Route } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SnotifyService } from 'ng-snotify';
 import { HttpHeaders } from '@angular/common/http';
+import { SliderComponent } from '../slider/slider.component';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  public loggedIn : boolean;
 
   public form = {
     email : null,
@@ -64,9 +67,10 @@ export class LoginComponent implements OnInit {
     this.token.set(data.token_type + " " + data.access_token);
     this.token.setRoles(data.user.roles);
     this.auth.changeAuthStatus(true);
+    this.loggedIn = true;
     this.router.navigateByUrl('/dashboard');
     this.notify.info("Login Succesfully", {timeout:2000});
-    window.location.reload();
+    //window.location.reload();
   }
 
 }

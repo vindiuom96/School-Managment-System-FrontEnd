@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { TokenService } from '../../services/token.service'
+import { SliderComponent } from '../slider/slider.component';
 
 @Component({
   selector: 'app-permissions',
@@ -43,7 +44,7 @@ export class PermissionsComponent implements OnInit {
     "order" : null
   }
 
-  constructor(private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  constructor(private slider : SliderComponent, private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
     pg.boundaryLinks = true;
     pg.rotate = true;
   }

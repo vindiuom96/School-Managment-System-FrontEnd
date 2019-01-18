@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,9 +6,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
+
+@Injectable()
 export class SliderComponent implements OnInit {
 
-  loggedIn : boolean;
+  public loggedIn : boolean;
   constructor(private auth : AuthService) { }
 
   ngOnInit() {

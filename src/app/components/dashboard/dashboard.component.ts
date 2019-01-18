@@ -16,10 +16,19 @@ export class DashboardComponent implements OnInit {
   constructor(private role : RolesCheckService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token')!=null && localStorage.getItem('role')==null)
+      this.wait(1100);
     this.isAdmin = this.role.isAdmin;
     this.isTeacher = this.role.isTeacher;
     this.isStudent = this.role.isStudent;
     this.isParent = this.role.isParent;
   }
 
+  private wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+    }
+  }
 }

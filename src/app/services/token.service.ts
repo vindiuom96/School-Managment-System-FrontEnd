@@ -6,10 +6,32 @@ import { ApiService } from './api.service';
 })
 export class TokenService {
 
+  private header = {
+    'X-Requested-With' : 'XMLHttpRequest',
+    'Authorization' : this.get()
+  }
+
+  private user = {
+    'name' : null,
+    'email' : null,
+    'img' : null
+  };
+
   constructor( private api : ApiService ) { }
+
+  private dataHandler(data){
+    this.user.name = data.name;
+    this.user.email = data.email;
+    this.user.img = this.api.host + data.avatar_url;
+    localStorage.setItem('user', JSON.stringify(this.user))
+  }
 
   set(token){
     localStorage.setItem('token', token);
+    this.api.get('auth/user', this.header).subscribe(
+      data => { this.dataHandler(data) },
+      error => { console.log(error) }
+    );
   }
 
   setRoles(roles){
@@ -46,6 +68,7 @@ export class TokenService {
   remove(){
     localStorage.removeItem('token');
     localStorage.removeItem('roles');
+    localStorage.removeItem('user');
   }
 
   loggedIn(){

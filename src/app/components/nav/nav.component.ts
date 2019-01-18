@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { RolesCheckService } from 'src/app/services/roles-check.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,12 @@ import { RolesCheckService } from 'src/app/services/roles-check.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  loggedIn : boolean;
+  public loggedIn : boolean;
+  public user = {
+    'name' : null,
+    'email' : null,
+    'img' : null
+  };
 
   isAdmin = false;
   isTeacher = false;
@@ -24,7 +30,8 @@ export class NavComponent implements OnInit {
     private auth : AuthService,
     private router : Router,
     private token : TokenService,
-    private notify : SnotifyService
+    private notify : SnotifyService,
+    private users : UserService
   ) { }
 
   ngOnInit() {
@@ -36,6 +43,20 @@ export class NavComponent implements OnInit {
       value => this.loggedIn = value
     );
     console.log(this.loggedIn);
+    if(this.loggedIn){
+      if(this.users.user()==null || this.users.user() == 'undefined'){
+        this.wait(1006);
+      }
+      this.user = this.users.user();
+    }
+  }
+
+  private wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+  }
   }
 
   logout(Event = MouseEvent){

@@ -61,7 +61,8 @@ import { SliderComponent } from './components/slider/slider.component';
     BeforeloginService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService,
-    DataService
+    DataService,
+    SliderComponent
   ],
   bootstrap: [AppComponent]
 })
