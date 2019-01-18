@@ -56,7 +56,7 @@ export class NavComponent implements OnInit {
     var end = start;
     while(end < start + ms) {
       end = new Date().getTime();
-  }
+    }
   }
 
   logout(Event = MouseEvent){

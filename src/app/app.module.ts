@@ -4,6 +4,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { ApiService } from './services/api.service';
 import { AfterloginService } from './services/afterlogin.service';
@@ -53,7 +54,8 @@ import { SliderComponent } from './components/slider/slider.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [
     ApiService,
