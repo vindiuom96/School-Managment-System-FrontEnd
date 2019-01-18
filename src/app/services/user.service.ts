@@ -43,7 +43,7 @@ export class UserService {
 
   user(){
     var data = JSON.parse(localStorage.getItem('user'));
-    if (data!=null)
+    if (data!=null && data!='undefined')
       return data;
     this.api.get('auth/user', this.header).subscribe(
       data => { this.dataHandler(data) },

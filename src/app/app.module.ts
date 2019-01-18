@@ -28,6 +28,7 @@ import { LocationMapComponent } from './components/location-map/location-map.com
 import { LocationComponent } from './components/location/location.component';
 import { DataService } from './services/data.service';
 import { SliderComponent } from './components/slider/slider.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SliderComponent } from './components/slider/slider.component';
     AttendanceComponent,
     LocationMapComponent,
     LocationComponent,
-    SliderComponent
+    SliderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

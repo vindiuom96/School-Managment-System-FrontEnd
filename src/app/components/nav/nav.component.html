@@ -5,7 +5,7 @@
               <i class="ti-menu ti-close"></i>
           </a>
 
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/" style="background: #3d3d3d;">
               <b class="logo-icon">
                   <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
               </b>
@@ -21,7 +21,7 @@
       </div>
 
 
-      <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background: #333d54;">
+      <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background: #3d3d3d;">
           <!-- ============================================================== -->
           <!-- toggle and nav items -->
           <!-- ============================================================== -->
@@ -42,8 +42,8 @@
               <!-- Notifications -->
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="ti-bell font-20"></i>
+                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd; font-size: 24px;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-bell"></i>
 
                   </a>
                   <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
@@ -91,8 +91,8 @@
               <!-- Messages -->
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd;" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="font-20 ti-email"></i>
+                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd; font-size: 24px;" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-envelope"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
                       <span class="with-arrow">
@@ -158,7 +158,7 @@
                               <p class=" m-b-0">{{user.email}}</p>
                           </div>
                       </div>
-                      <a class="dropdown-item" href="javascript:void(0)">
+                      <a class="dropdown-item" href="javascript:void(0)" routerLink="/profile">
                           <i class="ti-user m-r-5 m-l-5"></i> Profile</a>
                       <a class="dropdown-item" href="javascript:void(0)">
                           <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>

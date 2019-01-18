@@ -1,29 +1,52 @@
-<aside class="left-sidebar">
+<aside class="left-sidebar" style="background-color: #3d3d3d;">
   <!-- Sidebar scroll-->
-  <div class="scroll-sidebar" *ngIf="loggedIn">
+  <div class="scroll-sidebar" *ngIf="loggedIn" style="background-color: #3d3d3d;">
       <!-- Sidebar navigation-->
       <nav class="sidebar-nav">
-          <ul id="sidebarnav">
+          <ul id="sidebarnav" style="background: #3d3d3d;">
               <li class="nav-small-cap">
                   <i class="mdi mdi-dots-horizontal"></i>
-                  <span class="hide-menu">User Managment</span>
+                  <span class="hide-menu">User Management</span>
               </li>
               <li class="sidebar-item">
                   <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/users">
-                      <i class="icon-User"></i>
-                      <span class="hide-menu">Role Managment</span>
+                    <i class="fas fa-users"></i>
+                      <span class="hide-menu">Users</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
                   <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/roles">
-                    <i class="icon-User"></i>
+                    <i class="fas fa-user-cog"></i>
                     <span class="hide-menu">Roles</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
                   <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/permissions">
-                    <i class="icon-User"></i>
+                    <i class="fas fa-user-lock"></i>
                     <span class="hide-menu">Permissions</span>
+                  </a>
+              </li>
+
+              <li class="nav-small-cap">
+                  <i class="mdi mdi-dots-horizontal"></i>
+                  <span class="hide-menu">Acadamic</span>
+              </li>
+              <li class="sidebar-item">
+                  <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/streams">
+                      <i class="fas fa-network-wired"></i>
+                      <span class="hide-menu">Stream</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/subjects">
+                    <i class="fas fa-book"></i>
+                    <span class="hide-menu">Subjects</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" routerLink="/classes">
+                    <i class="fas fa-users"></i>
+                    <span class="hide-menu">Class</span>
                   </a>
               </li>
           </ul>

@@ -1,4 +1,6 @@
 <div class="container">
+    <div class="card shadow my-4">
+        <div class="card-header border-0">
   <div class="row" style="margin-top: 30px;">
     <div class="col-6">
       <h3>Permissions</h3>
@@ -11,14 +13,13 @@
     </div>
   </div>
 </div>
-<hr>
 
-<div class="container">
-    <table class="table table-bordered text-center">
-        <thead>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush text-center">
+        <thead class="thead-light">
           <tr>
-            <th (click)="sort('name')"><a href="javascript:void(0)" style="color:black">Name <span *ngIf="sortData.col=='name'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
-            <th>Action</th>
+            <th scope="col" (click)="sort('name')"><a href="javascript:void(0)" style="color:black">Name <span *ngIf="sortData.col=='name'"><i class="fa fa-caret-down" *ngIf="sortData.order=='asc'"></i><i class="fa fa-caret-up" *ngIf="sortData.order=='desc'"></i></span></a></th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -35,9 +36,11 @@
           </tr>
         </tbody>
       </table>
+      </div>
+    </div>
       <div class="col-12 justify-content-center" style="display: flex !important; justify-content: center !important;">
         <ngb-pagination [(collectionSize)]="pagination.max" (pageChange)="paginateClick($event)" [(page)]="pagination.page" ></ngb-pagination>
-      </div>
+    </div>
     </div>
 
 <!-- The Modal -->
