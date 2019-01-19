@@ -65,6 +65,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('isAdmin: ' + this.roleManage.isAdmin);
     this.isAdmin = this.roleManage.isAdmin;
     if(!this.isAdmin){
       this.notify.error("Permission Denited");
