@@ -3,6 +3,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { TokenService } from 'src/app/services/token.service';
 import { WaitService } from 'src/app/services/wait.service';
 import { SnotifyService } from 'ng-snotify';
+import { ActivatedRoute } from '@angular/router';
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 @Component({
   selector: 'app-profile',
@@ -35,14 +37,20 @@ export class ProfileComponent implements OnInit {
     'X-Requested-With' : 'XMLHttpRequest'
   }
 
+  me = false;
+
   constructor(
     private api : ApiService,
     private token : TokenService,
     private wait : WaitService,
-    private notify : SnotifyService
+    private notify : SnotifyService,
+    private route : ActivatedRoute,
+    private roles : RolesCheckService
   ) { }
 
   private dataHandler(data){
+    if(this.roles.isSuperAdmin)
+      this.me = true;
     this.user.address = data.address;
     this.user.email = data.email;
     this.user.name = data.name;
@@ -55,10 +63,21 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.get('auth/user', this.headers).subscribe(
-      data => this.dataHandler(data),
-      error => console.log(error)
-    )
+    this.route.queryParams.subscribe(params => {
+      if(params['id']){
+        this.me = false;
+        this.api.get('users/'+params['id'], this.headers).subscribe(
+          data => this.dataHandler(data),
+          error => console.log(error)
+        );
+      } else {
+        this.me = true;
+        this.api.get('auth/user', this.headers).subscribe(
+          data => this.dataHandler(data),
+          error => console.log(error)
+        );
+      }
+    });
     for(var i=0; i<10; i++){
       if(this.user!=null){
         break;

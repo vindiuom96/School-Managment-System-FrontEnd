@@ -36,9 +36,12 @@
                 <div *ngFor="let role of user.roles">{{ role.name }}</div>
               </td>
               <td>
-                <a href="javascript:void(0)" class="item"  (click)='pause( user.id )' data-toggle="tooltip" data-placement="top" title="Pause" style="padding-right: 10px;" *ngIf="user.active">
-                    <i class="fa fa-pause"></i>
-                </a>
+                  <a href="javascript:void(0)" class="item"  [routerLink]="['/profile']" [queryParams]="{id: user.id}" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;" *ngIf="user.active">
+                      <i class="fa fa-user"></i>
+                  </a>
+                  <a href="javascript:void(0)" class="item"  (click)='pause( user.id )' data-toggle="tooltip" data-placement="top" title="Pause" style="padding-right: 10px;" *ngIf="user.active">
+                      <i class="fa fa-pause"></i>
+                  </a>
                 <a href="javascript:void(0)" class="item"  (click)='pause( user.id )' data-toggle="tooltip" data-placement="top" title="Continue" style="padding-right: 10px;" *ngIf="!user.active">
                     <i class="fa fa-play"></i>
                 </a>

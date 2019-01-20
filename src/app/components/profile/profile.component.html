@@ -54,7 +54,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative" placeholder="Enter Email" value="{{user.email}}" required [(ngModel)]="user.email">
+                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative" placeholder="Enter Email" value="{{user.email}}" required [(ngModel)]="user.email" [disabled]='!me'>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -68,7 +68,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-name">Name</label>
-                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative" placeholder="Enter Name" value="{{user.name}}" required [(ngModel)]="user.name">
+                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative" placeholder="Enter Name" value="{{user.name}}" [disabled]='!me' required [(ngModel)]="user.name">
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-address">Address</label>
-                    <input id="input-address" name="address" class="form-control form-control-alternative" placeholder="Enter Address" [(ngModel)]="user.address" value="{{user.address}}" type="text" required>
+                    <input id="input-address" name="address" class="form-control form-control-alternative" placeholder="Enter Address" [disabled]='!me' [(ngModel)]="user.address" value="{{user.address}}" type="text" required>
                   </div>
                 </div>
               </div>
@@ -92,10 +92,10 @@
             <div class="pl-lg-4">
               <div class="form-group">
                 <label>About Me</label>
-                <textarea rows="4" name="about" class="form-control form-control-alternative" placeholder="Eneter Introduction about you..." [(ngModel)]="user.about">{{user.about}}</textarea>
+                <textarea rows="4" name="about" [disabled]='!me' class="form-control form-control-alternative" placeholder="Eneter Introduction about you..." [(ngModel)]="user.about">{{user.about}}</textarea>
               </div>
             </div>
-            <div class="float-right">
+            <div class="float-right" *ngIf='me'>
               <button type="submit" class="btn btn-info" [disabled]="!userForm.valid" (click)='submit()'>Save</button>
             </div>
           </form>

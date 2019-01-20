@@ -10,6 +10,7 @@ export class RolesCheckService {
   isTeacher = false;
   isStudent = false;
   isParent = false;
+  isSuperAdmin = false;
 
   constructor(private token : TokenService) {
     if(this.token.checkRole('Admin'))
@@ -20,5 +21,7 @@ export class RolesCheckService {
       this.isStudent = true;
     if(this.token.checkRole('Parent'))
       this.isParent = true;
+    if(this.token.checkRole('SuperAdmin'))
+      this.isSuperAdmin = true;
   }
 }

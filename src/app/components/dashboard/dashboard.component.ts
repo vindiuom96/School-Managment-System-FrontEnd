@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if(localStorage.getItem('token')!=null && localStorage.getItem('role')==null)
       this.wait(1100);
-    this.isAdmin = this.role.isAdmin;
+    this.isAdmin = this.role.isAdmin || this.role.isSuperAdmin;
     this.isTeacher = this.role.isTeacher;
     this.isStudent = this.role.isStudent;
     this.isParent = this.role.isParent;
