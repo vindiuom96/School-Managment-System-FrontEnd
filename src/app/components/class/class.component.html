@@ -1,0 +1,27 @@
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h3>Add Subjects</h3>
+
+
+              
+
+
+              <form name="form" method="post" action="/classes" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                
+                  <div class="form-group">
+                      <label for="subject">Subject Name</label>
+                      <input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" #subject="ngModel" [ngClass]="{ 'is-invalid': f.submitted && subject.invalid }" required />
+                      <div *ngIf="f.submitted && subject.invalid" class="invalid-feedback">
+                          <div *ngIf="subject.errors.required">Subject is required</div>
+                      </div>
+                  </div>
+                  <input class="btn btn-primary" type="submit" value="Submit">
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
