@@ -28,6 +28,7 @@ import { AfterloginService } from './services/afterlogin.service';
 import { ApiService } from './services/api.service';
 import { BeforeloginService } from './services/beforelogin.service';
 import { DataService } from './services/data.service';
+import { ClassComponent } from './components/class/class.component';
 
 
 
@@ -49,7 +50,8 @@ import { DataService } from './services/data.service';
     LocationMapComponent,
     LocationComponent,
     SliderComponent,
-    ProfileComponent
+    ProfileComponent,
+    ClassComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ import { DataService } from './services/data.service';
     DataService,
     SliderComponent
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

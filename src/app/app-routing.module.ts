@@ -18,6 +18,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { LocationMapComponent } from './components/location-map/location-map.component';
 import { LocationComponent } from './components/location/location.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ClassComponent } from './components/class/class.component';
 
 const appRoutes: Routes = [
   {
@@ -85,6 +86,11 @@ const appRoutes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'class',
+    component: ClassComponent,
     canActivate : [AfterloginService]
   }
 ];
