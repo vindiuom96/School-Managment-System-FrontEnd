@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +62,11 @@ import { ClassComponent } from './components/class/class.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     ApiService,
@@ -71,7 +77,7 @@ import { ClassComponent } from './components/class/class.component';
     DataService,
     SliderComponent
   ],
-  
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

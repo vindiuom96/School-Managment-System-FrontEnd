@@ -2,6 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '../node_modules/ng-snotify/styles/material.css';
 @import 'assets/css/argon2.css';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 .modal {
   overflow-y: scroll;
