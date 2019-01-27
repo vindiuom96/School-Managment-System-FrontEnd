@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { RolesCheckService } from 'src/app/services/roles-check.service';
 import { UserService } from 'src/app/services/user.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-nav',
@@ -31,8 +32,14 @@ export class NavComponent implements OnInit {
     private router : Router,
     private token : TokenService,
     private notify : SnotifyService,
-    private users : UserService
+    private users : UserService,
+    private api : ApiService
   ) { }
+
+  headers = {     //Token for API Authorization
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
+  }
 
   ngOnInit() {
     this.user = {
@@ -54,6 +61,29 @@ export class NavComponent implements OnInit {
       }
       this.user = this.users.user();
     }
+
+    this.api.get('notices?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
+      data => this.datahandler(data)
+    );
+  }
+
+  unread = [];
+  unreadCount = 0;
+  datahandler(data){
+    this.notify.clear();
+    console.log(data);
+
+    for(var i=0; i<data.length; i++){
+      if(data[i].status=='false'){
+        this.unread.push(data[i]);
+        this.api.get('notices/read?notice_id=' + data[i].id, this.headers).subscribe(
+        );
+      }
+    }
+    if(this.unread.length>0){
+      this.unreadCount = this.unread.length;
+    }
+    console.log(this.unread);
   }
 
   private wait(ms){

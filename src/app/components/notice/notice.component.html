@@ -1,0 +1,18 @@
+<div class="container my-4">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="card" *ngFor="let n of notices">
+            <div class="card-body collapse show" *ngIf="n.status=='true'">
+                <h4 class="card-title">{{ n.title }}</h4>
+                <p class="card-text">{{ n.content }}</p>
+                <small>{{ n.created_at }}</small>
+            </div>
+            <div class="card-body collapse show" *ngIf="n.status=='false'" style="background-color: gainsboro">
+                <h4 class="card-title">{{ n.title }}</h4>
+                <p class="card-text">{{ n.content }}</p>
+                <small>{{ n.created_at }}</small>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

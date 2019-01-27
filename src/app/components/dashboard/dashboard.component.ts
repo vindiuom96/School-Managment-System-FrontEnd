@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   isTeacher = false;
   isStudent = false;
   isParent = false;
+  isParentorStudent = false;
 
   constructor(private role : RolesCheckService) { }
 
@@ -34,6 +35,8 @@ export class DashboardComponent implements OnInit {
     this.isTeacher = this.role.isTeacher;
     this.isStudent = this.role.isStudent;
     this.isParent = this.role.isParent;
+    if(this.role.isParent||this.role.isStudent)
+      this.isParentorStudent = true;
   }
 
   private wait(ms){

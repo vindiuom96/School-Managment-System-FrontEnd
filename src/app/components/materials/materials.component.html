@@ -1,0 +1,33 @@
+<div class="container my-4 mx-4" *ngIf="isStudentorParent">
+    <div class="row">
+      <div class="col-12">
+          <div class="card shadow mr-5" style="min-width: 18rem;" *ngFor="let sub of subjects">
+            <!-- <img class="card-img-top" src="../../assets/img/theme/img-1-1000x900.jpg" alt="Card image cap"> -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6"> <h2 class="card-title">{{sub.name}}</h2> </div>
+                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <div class="col-6"> <a href="/materials?subject={{sub.id}}" class="btn btn-primary btn-sm float-right mr-3" style="font-size:15px;">View</a></div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  <p *ngIf="!material && !subjects">No Materials Found</p>
+  <ul class="timeline timeline-left" style="padding-right: 7%" *ngIf="material">
+    <li class="timeline-inverted timeline-item" *ngFor="let mat of material">
+        <div class="timeline-badge success"></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title">{{mat.title}}</h4>
+                <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{mat.date}}</small> </p>
+            </div>
+            <div class="timeline-body">
+                <a href="{{mat.file}}" target="window">{{mat.file}}</a>
+            </div>
+        </div>
+    </li>
+  </ul>
+
+  </div>

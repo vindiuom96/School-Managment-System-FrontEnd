@@ -43,7 +43,7 @@
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd; font-size: 20px;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-bell"></i>
+                      <i class="fas fa-bell"><sup *ngIf="unreadCount!=0">{{unreadCount}}</sup></i>
 
                   </a>
                   <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
@@ -53,8 +53,8 @@
                       <ul class="list-style-none">
                           <li>
                               <div class="drop-title bg-primary text-white">
-                                  <h4 class="m-b-0 m-t-5">4 New</h4>
-                                  <span class="font-light">Notifications</span>
+                                  <h4 class="m-b-0 m-t-5">{{unreadCount}} New</h4>
+                                  <span class="font-light">Notices</span>
                               </div>
                           </li>
                           <li>
@@ -62,22 +62,22 @@
 
 
                                   <!-- Message -->
-                                  <a href="javascript:void(0)" class="message-item">
+                                  <a href="javascript:void(0)" class="message-item" *ngFor="let n of unread">
                                       <span class="btn btn-danger btn-circle">
                                           <i class="fa fa-link"></i>
                                       </span>
-                                      <div class="mail-contnet">
-                                          <h5 class="message-title">Luanch Admin</h5>
-                                          <span class="mail-desc">Just see the my new admin!</span>
-                                          <span class="time">9:30 AM</span>
+                                      <div class="mail-contnet" >
+                                          <h5 class="message-title">{{n.title}}</h5>
+                                          <span class="mail-desc">{{n.content}}</span>
+                                          <span class="time">{{n.created_at}}</span>
                                       </div>
                                   </a>
 
                               </div>
                           </li>
                           <li>
-                              <a class="nav-link text-center m-b-5" href="javascript:void(0);">
-                                  <strong>Check all notifications</strong>
+                              <a class="nav-link text-center m-b-5" routerLink="/notices">
+                                  <strong>Check all Notices</strong>
                                   <i class="fa fa-angle-right"></i>
                               </a>
                           </li>

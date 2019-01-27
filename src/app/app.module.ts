@@ -34,6 +34,11 @@ import { DataService } from './services/data.service';
 import { ClassComponent } from './components/class/class.component';
 import { SchoolFeesComponent } from './components/school-fees/school-fees.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
+import { MaterialsComponent } from './components/materials/materials.component';
+import { ResultsComponent } from './components/results/results.component';
+import { TimeTableComponent } from './components/time-table/time-table.component';
+import { PaymentsComponent } from './components/payments/payments.component';
+import { NoticeComponent } from './components/notice/notice.component';
 
 
 
@@ -58,7 +63,12 @@ import { SubjectsComponent } from './components/subjects/subjects.component';
     ProfileComponent,
     ClassComponent,
     SchoolFeesComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    MaterialsComponent,
+    ResultsComponent,
+    TimeTableComponent,
+    PaymentsComponent,
+    NoticeComponent
   ],
   imports: [
     BrowserModule,

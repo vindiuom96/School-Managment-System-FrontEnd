@@ -45,13 +45,13 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'app-attendance',
-  templateUrl: './attendance.component.html',
-  styleUrls: ['./attendance.component.css']
+  selector: 'app-time-table',
+  templateUrl: './time-table.component.html',
+  styleUrls: ['./time-table.component.css']
 })
-export class AttendanceComponent implements OnInit {
+export class TimeTableComponent implements OnInit {
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 
@@ -168,7 +168,7 @@ export class AttendanceComponent implements OnInit {
     this.isParent = this.role.isParent;
     if(this.isParent || this.isStudent){
       this.stuAtt = true;
-      this.api.get('attendance?student_id=' + localStorage.getItem('student_id') + '&page=' + this.pagination.page, this.headers).subscribe(
+      this.api.get('timetable/mobile?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
         data => this.datahandler(data),
         error => { this.token.remove(); this.router.navigateByUrl("/login"); }
       );
@@ -181,13 +181,16 @@ export class AttendanceComponent implements OnInit {
     this.notify.clear();
     console.log(data);
     for(var i=0; i<data.length; i++){
-      data[i].start = new Date(data[i].start);
-      data[i].end = new Date(data[i].end);
+      let d = addDays(startOfDay(new Date()), (data[i].week_day-startOfDay(new Date()).getDay())%7);
+      data[i].start = new Date(d.setHours(data[i].start.split(':')[0], data[i].start.split(':')[1]));
+      data[i].end = new Date(d.setHours(data[i].end.split(':')[0], data[i].end.split(':')[1]));
+      data[i].title =  data[i].subject.name;
     }
     this.events = data;
 
   }
 
 }
+
 
 

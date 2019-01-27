@@ -13,9 +13,10 @@
 <div id="main-wrapper">
 
     <app-nav></app-nav>       <!--Top Navigation Bar-->
-    <app-slider></app-slider> <!--Side navigation panel-->
+    <app-slider *ngIf="loggedIn"></app-slider> <!--Side navigation panel-->
 
-    <div class="page-wrapper">
+    <router-outlet *ngIf="!loggedIn"></router-outlet>
+    <div class="page-wrapper" *ngIf="loggedIn">
 
       <router-outlet></router-outlet>   <!--Router Outlet-->
 

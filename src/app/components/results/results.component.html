@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card shadow my-4">
+      <div class="card-header border-0">
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-6">
+              <h3>Exam Results</h3>
+            </div>
+            <!-- <div class="col-md-3 col-6 text-right">
+              <a class="text-white btn btn-info" (click)='add()'>Add New {{ User }}</a>
+            </div> -->
+            <!-- <div class="col-md-3 text-right">
+              <input type="search" class="form-control" id="search" name="search" placeholder="Search"  [(ngModel)]="keyword" (keyup)="search()"/>
+            </div>
+          </div> -->
+      </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush text-center">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Term</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let res of results">
+                <td>{{ res.subject.name }}</td>
+                <td>{{ res.term }}</td>
+                <td>{{ res.mark }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
