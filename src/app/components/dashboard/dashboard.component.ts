@@ -8,27 +8,17 @@ import { RolesCheckService } from 'src/app/services/roles-check.service';
 })
 export class DashboardComponent implements OnInit {
 
-  title = 'app';
-  public pieChartLabels:string[] = ["Pending", "InProgress", "OnHold", "Complete", "Cancelled"];
-  public pieChartData:number[] = [21, 39, 10, 14, 16];
-  public pieChartType:string = 'bar';
-  public pieChartOptions:any = {'backgroundColor': [
-               "#FF6384",
-            "#4BC0C0",
-            "#FFCE56",
-            "#E7E9ED",
-            "#36A2EB"
-            ]}
-
-  // events on slice click
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
- // event on pie chart slice hover
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+  ];
 
   isAdmin = false;
   isTeacher = false;

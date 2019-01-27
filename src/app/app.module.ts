@@ -71,7 +71,7 @@ import { ClassComponent } from './components/class/class.component';
     DataService,
     SliderComponent
   ],
-  
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
