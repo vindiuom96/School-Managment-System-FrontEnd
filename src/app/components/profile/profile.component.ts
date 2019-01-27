@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     this.user.avatar_url = data.avatar_url;
     this.user.id = data.id;
     console.log(data);
-    this.role = JSON.parse(localStorage.getItem('roles'))[0];
+    this.role = data.roles[0].name;
     this.date = data.updated_at;
   }
 
