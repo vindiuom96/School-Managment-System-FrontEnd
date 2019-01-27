@@ -26,9 +26,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.slim.js",
-              "node_modules/raphael/raphael.js",
-              "node_modules/morris.js/morris.js"
             ]
           },
           "configurations": {
