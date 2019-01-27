@@ -19,6 +19,8 @@ import { LocationMapComponent } from './components/location-map/location-map.com
 import { LocationComponent } from './components/location/location.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClassComponent } from './components/class/class.component';
+import { SchoolFeesComponent } from './components/school-fees/school-fees.component';
+import { SubjectsComponent } from './components/subjects/subjects.component';
 
 const appRoutes: Routes = [
   {
@@ -91,6 +93,16 @@ const appRoutes: Routes = [
   {
     path: 'class',
     component: ClassComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'fees',
+    component: SchoolFeesComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'subjects',
+    component: SubjectsComponent,
     canActivate : [AfterloginService]
   }
 ];

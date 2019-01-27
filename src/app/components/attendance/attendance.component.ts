@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   startOfDay,
   endOfDay,
@@ -15,6 +16,14 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { ApiService } from '../../services/api.service';
+import { SnotifyService } from 'ng-snotify';
+import { Router } from '@angular/router';
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
+
+import { TokenService } from '../../services/token.service'
+import { DataService } from 'src/app/services/data.service';
+import { RolesCheckService } from 'src/app/services/roles-check.service';
 
 const colors: any = {
   red: {
@@ -28,7 +37,11 @@ const colors: any = {
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
-  }
+  },
+  green: {
+    primary: '#1eff21',
+    secondary: '#FAE3E3'
+  },
 };
 
 @Component({
@@ -48,6 +61,11 @@ export class AttendanceComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
+
+  isAdmin = false;
+  isTeacher = false;
+  isStudent = false;
+  isParent = false;
 
   actions: CalendarEventAction[] = [
     {
@@ -73,31 +91,6 @@ export class AttendanceComponent implements OnInit {
       color: colors.red,
       actions: this.actions,
       allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
       resizable: {
         beforeStart: true,
         afterEnd: true
@@ -149,9 +142,50 @@ export class AttendanceComponent implements OnInit {
       }
     });
   }
-  constructor() { }
+
+  pagination = {    //Current Pagination data
+    'page' :  '1',
+    'max' : '10'
+  }
+  headers = {     //Token for API Authorization
+    'Authorization' : this.token.get(),
+    'X-Requested-With' : 'XMLHttpRequest'
+  }
+
+  constructor(private role : RolesCheckService,private data: DataService , private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+    pg.boundaryLinks = true;
+    pg.rotate = true;
+  }
+
+  stuAtt = false;
 
   ngOnInit() {
+    this.notify.clear();
+    this.notify.info("Loading...", {timeout: 0});
+    this.isAdmin = this.role.isAdmin || this.role.isSuperAdmin;
+    this.isTeacher = this.role.isTeacher;
+    this.isStudent = this.role.isStudent;
+    this.isParent = this.role.isParent;
+    if(this.isParent || this.isStudent){
+      this.stuAtt = true;
+      this.api.get('attendance?student_id=' + localStorage.getItem('student_id') + '&page=' + this.pagination.page, this.headers).subscribe(
+        data => this.datahandler(data),
+        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+      );
+    } else {
+      this.notify.clear();
+    }
+  }
+
+  datahandler(data){
+    this.notify.clear();
+    console.log(data);
+    for(var i=0; i<data.length; i++){
+      data[i].start = new Date(data[i].start);
+      data[i].end = new Date(data[i].end);
+    }
+    this.events = data;
+
   }
 
 }

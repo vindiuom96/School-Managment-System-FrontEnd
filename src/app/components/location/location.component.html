@@ -27,7 +27,7 @@
                 <td>{{ location.name }}</td>
                 <td ><span *ngIf="location.location">{{ location.location.timestamp }}</span><span *ngIf="!location.location">Unavailable</span></td>
                 <td>
-                  <a href="javascript:void(0)" class="item"  (click)="locationMap(location.id)" data-toggle="tooltip" data-placement="top" title="view" style="padding-right: 10px;">
+                  <a href="javascript:void(0)" class="item"  (click)="locationMap(location.id)" data-toggle="tooltip" data-placement="top" title="view" style="padding-right: 10px;" *ngIf="location.location">
                       <i class="fa fa-map-marker"></i>
                   </a>
                 </td>

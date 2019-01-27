@@ -32,6 +32,8 @@ import { ApiService } from './services/api.service';
 import { BeforeloginService } from './services/beforelogin.service';
 import { DataService } from './services/data.service';
 import { ClassComponent } from './components/class/class.component';
+import { SchoolFeesComponent } from './components/school-fees/school-fees.component';
+import { SubjectsComponent } from './components/subjects/subjects.component';
 
 
 
@@ -54,7 +56,9 @@ import { ClassComponent } from './components/class/class.component';
     LocationComponent,
     SliderComponent,
     ProfileComponent,
-    ClassComponent
+    ClassComponent,
+    SchoolFeesComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
