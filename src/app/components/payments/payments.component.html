@@ -2,11 +2,11 @@
     <div class="card shadow my-4">
       <div class="card-header border-0">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <!-- <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#history" role="tab"><span class="hidden-sm-up"><i class="fas fa-history"></i></span> <span class="hidden-xs-down">History</span></a> </li>
             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#pay" role="tab"><span class="hidden-sm-up"><i class="fab fa-cc-visa"></i></span> <span class="hidden-xs-down">Make Payment</span></a> </li>
             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-        </ul>
+        </ul> -->
 
         <!-- Tab panes -->
         <div class="tab-content tabcontent-border">
@@ -22,6 +22,30 @@
                       <input type="search" class="form-control" id="search" name="search" placeholder="Search"  [(ngModel)]="keyword" (keyup)="search()"/>
                     </div>
                   </div> -->
+              </div>
+              <div class="tab-pane  p-20" id="pay" role="tabpanel">
+                  <p>Next Payment at: {{ payhere.student.next_payment_at }}</p>
+                  <form method="post" action="https://sandbox.payhere.lk/pay/checkout" ngNoForm>
+                    <input type="hidden" name="merchant_id" [(ngModel)]="payHereData.merchant_id">    <!-- Replace your Merchant ID -->
+                    <input type="hidden" name="return_url" [(ngModel)]="payHereData.return_url">
+                    <input type="hidden" name="cancel_url" [(ngModel)]="payHereData.cancel_url">
+                    <input type="hidden" name="notify_url" [(ngModel)]="payHereData.notify_url">
+                    <input type="hidden" name="order_id" [(ngModel)]="payHereData.order_id">
+                    <input type="hidden" name="items" [(ngModel)]="payHereData.items">
+                    <input type="hidden" name="currency" [(ngModel)]="payHereData.currency">
+                    <input type="hidden" name="amount" [(ngModel)]="payHereData.amount">
+                    <input type="hidden" name="first_name" [(ngModel)]="payHereData.first_name">
+                    <input type="hidden" name="last_name" [(ngModel)]="payHereData.last_name">
+                    <input type="hidden" name="email" [(ngModel)]="payHereData.email">
+                    <input type="hidden" name="phone" [(ngModel)]="payHereData.phone">
+                    <input type="hidden" name="address" [(ngModel)]="payHereData.address">
+                    <input type="hidden" name="city" [(ngModel)]="payHereData.city">
+                    <input type="hidden" name="country" [(ngModel)]="payHereData.country">
+                    <input type="submit" class="text-white btn btn-info" value="Pay Now">
+                </form>
+                  <div class="col-md-3 col-6 text-right">
+
+                    </div>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush text-center">
@@ -51,29 +75,6 @@
                 </div>
             </div>
 
-
-            <div class="tab-pane  p-20" id="pay" role="tabpanel">
-                <div class="col-md-3 col-6 text-right">
-                    <form method="post" action="https://sandbox.payhere.lk/pay/checkout" ngNoForm>
-                      <input type="hidden" name="merchant_id" [(ngModel)]="payHereData.merchant_id">    <!-- Replace your Merchant ID -->
-                      <input type="hidden" name="return_url" [(ngModel)]="payHereData.return_url">
-                      <input type="hidden" name="cancel_url" [(ngModel)]="payHereData.cancel_url">
-                      <input type="hidden" name="notify_url" [(ngModel)]="payHereData.notify_url">
-                      <input type="hidden" name="order_id" [(ngModel)]="payHereData.order_id">
-                      <input type="hidden" name="items" [(ngModel)]="payHereData.items"><br>
-                      <input type="hidden" name="currency" [(ngModel)]="payHereData.currency">
-                      <input type="hidden" name="amount" [(ngModel)]="payHereData.amount">
-                      <input type="hidden" name="first_name" [(ngModel)]="payHereData.first_name">
-                      <input type="hidden" name="last_name" [(ngModel)]="payHereData.last_name"><br>
-                      <input type="hidden" name="email" [(ngModel)]="payHereData.email">
-                      <input type="hidden" name="phone" [(ngModel)]="payHereData.phone"><br>
-                      <input type="hidden" name="address" [(ngModel)]="payHereData.address">
-                      <input type="hidden" name="city" [(ngModel)]="payHereData.city">
-                      <input type="hidden" name="country" [(ngModel)]="payHereData.country"><br><br>
-                      <input type="submit" class="text-white btn btn-info" value="Pay Now">
-                  </form>
-                  </div>
-            </div>
 
 
             <div class="tab-pane p-20" id="messages" role="tabpanel">3</div>

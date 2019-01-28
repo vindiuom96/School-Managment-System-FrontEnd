@@ -81,7 +81,7 @@ export class PaymentsComponent implements OnInit {
       'order_id' : this.payhere.order_id,
       'items' : this.payhere.student.package.name,
       'currency' : 'LKR',
-      'amount' : this.payhere.student.package.price,
+      'amount' : this.payhere.student.package.price
     }
   }
 
