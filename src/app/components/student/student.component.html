@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="card shadow my-4">
+      <div class="card-header border-0">
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-6">
+              <h3>Students in Class</h3>
+          </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush text-center">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Avatar</th>
+                <th scope="col">Index No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th>Student Profile</th>
+                <th>Parent Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <th scope="row"><img src="{{ student.user.avatar_url }}" style="max-height: 40px;"></th>
+                <td>{{ student.indexNo }}</td>
+                <td>{{ student.user.name }}</td>
+                <td>{{ student.user.email }}</td>
+                <td><a href="javascript:void(0)" class="item"  [routerLink]="['/profile']" [queryParams]="{id: student.user.id}" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;">
+                  <i class="fa fa-user"></i>
+              </a></td>
+              <td><a href="javascript:void(0)" class="item"  [routerLink]="['/profile']" [queryParams]="{id: student.parent.user_id}" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;">
+                <i class="fa fa-user"></i>
+            </a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>

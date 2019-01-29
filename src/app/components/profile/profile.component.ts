@@ -13,6 +13,11 @@ import { RolesCheckService } from 'src/app/services/roles-check.service';
 })
 export class ProfileComponent implements OnInit {
 
+  isAdmin = false;
+  isTeacher = false;
+  isStudent = false;
+  isParent = false;
+
   user = {
     'name' : null,
     'avatar_url' : null,
@@ -38,6 +43,7 @@ export class ProfileComponent implements OnInit {
   }
 
   me = false;
+  other = null;
 
   constructor(
     private api : ApiService,
@@ -49,7 +55,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   private dataHandler(data){
-    if(this.roles.isSuperAdmin)
+    this.api.get('users/profile?user_id=' + data.id, this.headers).subscribe(
+      data => { this.other = data; console.log(data); }
+    );
+    if(this.roles.isSuperAdmin || this.roles.isAdmin)
       this.me = true;
     this.user.address = data.address;
     this.user.email = data.email;
@@ -63,6 +72,10 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAdmin = this.roles.isAdmin || this.roles.isSuperAdmin;
+    this.isTeacher = this.roles.isTeacher;
+    this.isStudent = this.roles.isStudent;
+    this.isParent = this.roles.isParent;
     this.route.queryParams.subscribe(params => {
       if(params['id']){
         this.me = false;

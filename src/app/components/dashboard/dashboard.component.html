@@ -4,13 +4,13 @@
       <div class="header-body">
         <!-- Card stats -->
         <div class="row pt-5" *ngIf="isAdmin || isTeacher">
-          <div class="col-xl-3 col-md-6">
+          <div class="col-xl-3 col-md-6" *ngIf="!isTeacher">
             <div class="card card-stats shadow mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Students</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -24,13 +24,33 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-md-6">
+          <div class="col-xl-3 col-md-6" *ngIf="isTeacher">
+              <div class="card card-stats shadow mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Students</h5>
+                      <span class="h2 font-weight-bold mb-0">13</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                        <i class="fas fa-graduation-cap"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <a [routerLink]="['/students']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          <div class="col-xl-3 col-md-6" *ngIf="!isTeacher">
             <div class="card card-stats shadow mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -44,13 +64,13 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-md-6">
+          <div class="col-xl-3 col-md-6" *ngIf="!isTeacher">
             <div class="card card-stats shadow mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Parents</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -70,7 +90,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Classes</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <span class="h2 font-weight-bold mb-0">13</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -92,7 +112,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Subjects</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -112,7 +132,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Materials</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <span class="h2 font-weight-bold mb-0">13</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -127,32 +147,12 @@
               </div>
             </div>
           <div class="col-xl-3 col-md-6">
-            <div class="card card-stats shadow mb-4 mb-xl-0">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Streams</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
-                  </div>
-                  <div class="col-auto">
-                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                      <i class="fas fa-network-wired"></i>
-                    </div>
-                  </div>
-                </div>
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <a [routerLink]="['/streams']"><span class="text-warning mr-2"><i class="fa fa-arrow-right"></i> View</span></a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
               <div class="card card-stats shadow mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">School Fees</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <span class="h2 font-weight-bold mb-0">13</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -172,7 +172,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Attendance</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -194,7 +194,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Timetables</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -214,7 +214,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Notices</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -234,7 +234,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Exam Results</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -254,7 +254,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Student Location</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <span class="h2 font-weight-bold mb-0">13</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -273,7 +273,7 @@
     </div>
   </div>
   <!-- Page content -->
-  <div class="container-fluid mt--7">
+  <div class="container-fluid mt--7" *ngIf="isAdmin">
   <div class="row">
     <div class="col-xl-8 mb-5 mb-xl-0">
       <div class="card bg-gradient-default shadow">
@@ -281,9 +281,9 @@
           <div class="row align-items-center">
             <div class="col">
               <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-              <h2 class="text-white mb-0">Sales value</h2>
+              <h2 class="text-white mb-0">Attendance</h2>
             </div>
-            <div class="col">
+            <!-- <div class="col">
               <ul class="nav nav-pills justify-content-end">
                 <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
                   <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
@@ -298,7 +298,7 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="card-body">
@@ -322,7 +322,7 @@
           <div class="row align-items-center">
             <div class="col">
               <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-              <h2 class="mb-0">Total orders</h2>
+              <h2 class="mb-0">Top Students</h2>
             </div>
           </div>
         </div>
@@ -341,7 +341,7 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Page visits</h3>
+              <h3 class="mb-0">Last Visited</h3>
             </div>
             <div class="col text-right">
               <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -353,7 +353,7 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Page name</th>
+                <th scope="col">Time</th>
                 <th scope="col">Visitors</th>
                 <th scope="col">Unique users</th>
                 <th scope="col">Bounce rate</th>

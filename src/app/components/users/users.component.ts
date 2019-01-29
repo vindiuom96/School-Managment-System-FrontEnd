@@ -86,17 +86,17 @@ export class UsersComponent implements OnInit {
     if(this.keyword) {
       this.api.get('users?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.clear(); console.log(error); this.notify.error(error.error.message); }
       );
     } else {
       this.api.get('users?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order + '&role=' + this.role, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { console.log(error); this.notify.error(error.error.message); }
       );
     }
     this.api.get('role', this.headers).subscribe(
       data => { console.log(data); this.roles=data; },
-      error => { this.notify.clear(); this.notify.error(error.error.message); }
+      error => { console.log(error); this.notify.clear(); this.notify.error(error.error.message); }
     );
   }
 

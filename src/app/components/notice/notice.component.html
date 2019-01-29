@@ -5,12 +5,12 @@
             <div class="card-body collapse show" *ngIf="n.status=='true'">
                 <h4 class="card-title">{{ n.title }}</h4>
                 <p class="card-text">{{ n.content }}</p>
-                <small>{{ n.created_at }}</small>
+                <small>{{ n.created_at }} from Science Teacher</small>
             </div>
             <div class="card-body collapse show" *ngIf="n.status=='false'" style="background-color: gainsboro">
                 <h4 class="card-title">{{ n.title }}</h4>
                 <p class="card-text">{{ n.content }}</p>
-                <small>{{ n.created_at }}</small>
+                <small>{{ n.created_at }} from Maths Teacher</small>
             </div>
         </div>
       </div>

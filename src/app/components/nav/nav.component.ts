@@ -76,14 +76,20 @@ export class NavComponent implements OnInit {
     for(var i=0; i<data.length; i++){
       if(data[i].status=='false'){
         this.unread.push(data[i]);
-        this.api.get('notices/read?notice_id=' + data[i].id, this.headers).subscribe(
-        );
       }
     }
     if(this.unread.length>0){
       this.unreadCount = this.unread.length;
     }
     console.log(this.unread);
+  }
+
+  read(){
+    this.unreadCount = 0;
+    for(var i=0; i<this.unread.length; i++){
+      this.api.get('notices/read?notice_id=' + this.unread[i].id, this.headers).subscribe(
+      );
+    }
   }
 
   private wait(ms){

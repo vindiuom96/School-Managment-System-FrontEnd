@@ -42,7 +42,7 @@
               <!-- Notifications -->
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd; font-size: 20px;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a (click)="read()" class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #ddd; font-size: 20px;" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-bell"><sup *ngIf="unreadCount!=0">{{unreadCount}}</sup></i>
 
                   </a>

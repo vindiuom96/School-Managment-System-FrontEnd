@@ -35,6 +35,25 @@
           </div>
         </div>
       </div>
+      <div class="card card-profile shadow" *ngIf="isAdmin || isTeacher">
+          <div class="card-body pt-0 pt-md-4">
+            <div class="text-center">
+              <h3>Other Details<span class="font-weight-light"></span>
+              </h3>
+              <style>
+                table, th, td {
+                  border: 1px solid black;
+                  padding: 3px;
+                }
+              </style>
+              <table>
+              <tr class="text-center" *ngFor="let key of other | keys">
+                <td>{{key}}   </td> <td> {{other[key]}}</td>
+              </tr>
+            </table>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="col-xl-8 order-xl-1">
       <div class="card bg-secondary shadow">
