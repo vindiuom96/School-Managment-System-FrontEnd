@@ -20,13 +20,7 @@ export class ClassComponent implements OnInit {
 
   ngOnInit() {
     this.api.get('class/teacher', this.headers).subscribe(
-      data => {console.log(data)}
-    )
-  }
-  onSubmit() {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
-    this.api.post('classes', this.model, null).subscribe(
-      data => {console.log(data)}
+      data => {console.log(data), this.classes = data; }
     )
   }
 

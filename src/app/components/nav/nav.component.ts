@@ -61,10 +61,10 @@ export class NavComponent implements OnInit {
       }
       this.user = this.users.user();
     }
-
-    this.api.get('notices?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
-      data => this.datahandler(data)
-    );
+    if(this.loggedIn)
+      this.api.get('notices?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
+        data => this.datahandler(data)
+      );
   }
 
   unread = [];

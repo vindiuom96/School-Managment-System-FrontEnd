@@ -1,6 +1,66 @@
 <div class="container">
     <div class="card shadow my-4">
-      <div class="card-header border-0">
+        <div class="card-header border-0" *ngIf="isTeacher">
+            <div class="row" style="margin-top: 30px;">
+              <div class="col-6">
+                <h3 *ngIf="class">Select Class</h3>
+                <h3 *ngIf="!class">Exam Results</h3>
+              </div>
+              <!-- <div class="col-md-3 col-6 text-right">
+                <a class="text-white btn btn-info" (click)='add()'>Add New {{ User }}</a>
+              </div> -->
+              <!-- <div class="col-md-3 text-right">
+                <input type="search" class="form-control" id="search" name="search" placeholder="Search"  [(ngModel)]="keyword" (keyup)="search()"/>
+              </div>
+            </div> -->
+        </div>
+        <div class="row" *ngIf="class">
+          <div class="col-12">
+              <div class="card shadow mr-5" style="min-width: 18rem;" *ngFor="let class of classes">
+                <!-- <img class="card-img-top" src="../../assets/img/theme/img-1-1000x900.jpg" alt="Card image cap"> -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6"> <h2 class="card-title">{{class.grade}} - {{class.sub_class}}</h2> </div>
+                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                      <div class="col-6"> <a href="/results?results={{class.id}}" class="btn btn-primary btn-sm float-right mr-3" style="font-size:15px;">View</a></div>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+          <div class="col-md-3 col-6 text-right float-right mb-4" *ngIf="!class">
+            <a class="text-white btn btn-info" (click)='add()'>Add New Result</a>
+          </div>
+      <div class="table-responsive" *ngIf="!class">
+          <table class="table align-items-center table-flush text-center">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Index No</th>
+                  <th scope="col">Term</th>
+                  <th scope="col">Result</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let res of results">
+                  <td>{{ res.subject.name }}</td>
+                  <td>{{ res.student.indexNo }}</td>
+                  <td>{{ res.term }}</td>
+                  <td>{{ res.mark }}</td>
+                  <td>
+                    <a href="javascript:void(0)" class="item"  (click)='edit( res.id )' data-toggle="tooltip" data-placement="top" title="Edit" style="padding-right: 10px;">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="item"  (click)='delete( res.id )' data-toggle="tooltip" data-placement="top" title="Delete" style="padding-right: 10px;">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      <div class="card-header border-0" *ngIf="isParent || isStudent">
           <div class="row" style="margin-top: 30px;">
             <div class="col-6">
               <h3>Exam Results</h3>
@@ -32,4 +92,110 @@
           </table>
         </div>
     </div>
+  </div>
+
+
+  <!-- The Modal -->
+  <div id="editModal" class="modal" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Result</h5>
+              <button type="button" class="close" (click)='closeEditModal()'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" [hidden]="!error.subject">
+                  {{ error.subject }}
+                </div>
+                <div class="alert alert-danger" [hidden]="!error.indexNo">
+                    {{ error.indexNo }}
+                </div>
+                <div class="alert alert-danger" [hidden]="!error.term">
+                    {{ error.term }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.mark">
+                      {{ error.mark }}
+                  </div>
+              <form #newUserForm=ngForm>
+                <div class="form-group">
+                    <label for="name">Subject</label>
+                    <input type="text" class="form-control" id="name" name="subject" placeholder="Enter Subject"  required [(ngModel)]="data.subject"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Index No</label>
+                    <input type="text" class="form-control" id="name" name="indexNo" placeholder="Enter Index No"  required [(ngModel)]="data.indexNo"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Term</label>
+                    <input type="number" class="form-control" id="name" name="term" placeholder="Enter Term"  required [(ngModel)]="data.term"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Mark</label>
+                    <input type="number" class="form-control" id="name" name="mark" placeholder="Enter MarkS"  required [(ngModel)]="data.mark"/>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary"  [disabled]="!newUserForm.valid" (click)='editsubmit()'>Save changes</button>
+              <button type="button" class="btn btn-secondary" (click)='closeEditModal()'>Close</button>
+            </div>
+          </div>
+        </div>
+
+  </div>
+
+  <!-- The Modal -->
+  <div id="addModal" class="modal" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add New Result</h5>
+              <button type="button" class="close" (click)='closeAddModal()'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" [hidden]="!error.subject">
+                    {{ error.subject }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.indexNo">
+                      {{ error.indexNo }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.term">
+                      {{ error.term }}
+                    </div>
+                    <div class="alert alert-danger" [hidden]="!error.mark">
+                        {{ error.mark }}
+                    </div>
+              <form #editUserForm=ngForm>
+
+                      <div class="form-group">
+                          <label for="name">Subject</label>
+                          <input type="text" class="form-control" id="name" name="subject" placeholder="Enter Subject"  required [(ngModel)]="data.subject"/>
+                      </div>
+                      <div class="form-group">
+                          <label for="name">Index No</label>
+                          <input type="text" class="form-control" id="name" name="indexNo" placeholder="Enter Index No"  required [(ngModel)]="data.indexNo"/>
+                      </div>
+                      <div class="form-group">
+                          <label for="name">Term</label>
+                          <input type="number" class="form-control" id="name" name="term" placeholder="Enter Term"  required [(ngModel)]="data.term"/>
+                      </div>
+                      <div class="form-group">
+                          <label for="name">Mark</label>
+                          <input type="number" class="form-control" id="name" name="mark" placeholder="Enter MarkS"  required [(ngModel)]="data.mark"/>
+                      </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)='addModalSubmit()' [disabled]="!editUserForm.valid">Save changes</button>
+              <button type="button" class="btn btn-secondary" (click)='closeAddModal()'>Close</button>
+            </div>
+          </div>
+        </div>
   </div>

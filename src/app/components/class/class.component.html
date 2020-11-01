@@ -1,27 +1,36 @@
-<!-- main app container -->
-<div class="jumbotron">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6 offset-md-3">
-              <h3>Add Subjects</h3>
-
-
-              
-
-
-              <form name="form" method="post" action="/classes" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                
-                  <div class="form-group">
-                      <label for="subject">Subject Name</label>
-                      <input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" #subject="ngModel" [ngClass]="{ 'is-invalid': f.submitted && subject.invalid }" required />
-                      <div *ngIf="f.submitted && subject.invalid" class="invalid-feedback">
-                          <div *ngIf="subject.errors.required">Subject is required</div>
-                      </div>
-                  </div>
-                  <input class="btn btn-primary" type="submit" value="Submit">
-              </form>
+<div class="container">
+    <div class="card shadow my-4">
+      <div class="card-header border-0">
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-6">
+              <h3>Assigned Classes</h3>
           </div>
       </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush text-center">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Grade</th>
+                <th scope="col">Results</th>
+                <th scope="col">Student Matrials</th>
+                <th scope="col">Time Table</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let class of classes">
+                <td>{{ class.grade }}-{{ class.sub_class }}</td>
+                <td><a href="javascript:void(0)" class="item"  [routerLink]="['/results']" [queryParams]="{id: '1'}" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;">
+                  <i class="fa fa-chart-line"></i>
+              </a></td>
+              <td><a href="javascript:void(0)" class="item"  [routerLink]="['/materials']" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;">
+                <i class="fa fa-book"></i>
+            </a></td>
+            <td><a href="javascript:void(0)" class="item"  [routerLink]="['/timetables']" data-toggle="tooltip" data-placement="top" title="View User" style="padding-right: 10px;">
+              <i class="fa fa-calendar-alt"></i>
+          </a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
   </div>
-</div>
-

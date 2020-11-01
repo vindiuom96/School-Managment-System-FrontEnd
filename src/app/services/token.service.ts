@@ -14,7 +14,8 @@ export class TokenService {
   private user = {
     'name' : null,
     'email' : null,
-    'img' : null
+    'img' : null,
+    'id' : null
   };
 
   constructor( private api : ApiService ) { }
@@ -22,9 +23,11 @@ export class TokenService {
     this.user = {
       'name' : null,
       'email' : null,
-      'img' : null
+      'img' : null,
+      'id' : null
     };
     localStorage.setItem('token', token);
+    this.user.id = data.user.id;
     this.user.name = data.user.name;
     this.user.email = data.user.email;
     this.user.img = this.api.host + data.user.avatar_url;

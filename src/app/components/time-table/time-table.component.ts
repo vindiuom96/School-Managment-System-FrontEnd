@@ -157,8 +157,6 @@ export class TimeTableComponent implements OnInit {
     pg.rotate = true;
   }
 
-  stuAtt = false;
-
   ngOnInit() {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
@@ -167,13 +165,16 @@ export class TimeTableComponent implements OnInit {
     this.isStudent = this.role.isStudent;
     this.isParent = this.role.isParent;
     if(this.isParent || this.isStudent){
-      this.stuAtt = true;
       this.api.get('timetable/mobile?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.error(error.error.message); this.token.remove(); this.router.navigateByUrl("/login"); }
       );
-    } else {
-      this.notify.clear();
+    } else if(this.isTeacher){
+      console.log(JSON.parse(localStorage.getItem('user')));
+      this.api.get('timetable/mobile?teacher_id=' + JSON.parse(localStorage.getItem('user')).id, this.headers).subscribe(
+        data => this.datahandler(data),
+        error => { this.notify.error(error.error.message); this.token.remove(); this.router.navigateByUrl("/login"); }
+      );
     }
   }
 
@@ -185,6 +186,8 @@ export class TimeTableComponent implements OnInit {
       data[i].start = new Date(d.setHours(data[i].start.split(':')[0], data[i].start.split(':')[1]));
       data[i].end = new Date(d.setHours(data[i].end.split(':')[0], data[i].end.split(':')[1]));
       data[i].title =  data[i].subject.name;
+      if(this.isTeacher)
+        data[i].title += ' - ' + data[i].class.grade + data[i].class.sub_class;
     }
     this.events = data;
 

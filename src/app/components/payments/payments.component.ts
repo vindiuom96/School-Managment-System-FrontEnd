@@ -49,8 +49,11 @@ export class PaymentsComponent implements OnInit {
           data => this.datahandlerPay(data),
           error => { this.token.remove(); this.router.navigateByUrl("/login"); }
         );
-      } else {
-        this.notify.clear();
+      } else if(this.isTeacher){
+        this.api.get('payments/history', this.headers).subscribe(
+          data => this.datahandler(data),
+          error => { this.notify.error(error.error.message) }
+        );
       }
     });
   }
