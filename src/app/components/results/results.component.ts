@@ -29,6 +29,13 @@ export class ResultsComponent implements OnInit {
   constructor(private role : RolesCheckService, private route : ActivatedRoute, private token : TokenService, private router : Router,private api : ApiService, private notify : SnotifyService) {
   }
 
+  classesData : any = {
+    'id' : 1,
+    'grade' : 12,
+    'sub_class' : 'A'
+  };
+  classVar = null;
+
   ngOnInit() {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
@@ -47,11 +54,21 @@ export class ResultsComponent implements OnInit {
       } else {
         this.class = true;
         if(this.isParent || this.isStudent){
-          this.isStudentorParent = true;
-          this.api.get('results/mobile?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
-            data => this.datahandler(data),
+          this.api.get('class/teacher?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
+            data => this.dataHandler(data),
             error => { this.notify.error(error.error.message) }
           );
+          this.isStudentorParent = true;
+          if(params['subject'])
+            this.api.get('results/mobile?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
+              data => this.datahandler(data),
+              error => { this.notify.error(error.error.message) }
+            );
+          else
+            this.api.get('results/mobile?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
+              data => this.datahandler(data),
+              error => { this.notify.error(error.error.message) }
+            );
         } else if(this.isTeacher) {
           this.api.get('class/teacher', this.headers).subscribe(
             data => {console.log(data), this.classes = data; }
@@ -61,16 +78,35 @@ export class ResultsComponent implements OnInit {
     });
   }
 
+  dataHandler(data){
+    this.classesData = data;
+    console.log(data);
+  }
+
+  sum = 0;
+  count = 0;
+  term = null;
   class = false;
   classes = null;
   datahandlerresults(data){
+    this.sum = 0;
     this.results = data;
+    this.count = data.length;
+    for(var i=0; i<data.length; i++){
+      this.sum += data[i].mark;
+    }
+    console.log(data[i].mark);
   }
 
   datahandler(data){
     this.notify.clear();
     console.log(data);
     this.results = data;
+    this.count = data.length;
+    for(var i=0; i<data.length; i++){
+      this.sum += data[i].mark;
+    }
+    console.log(data[i].mark);
   }
 
   //User edit Handling

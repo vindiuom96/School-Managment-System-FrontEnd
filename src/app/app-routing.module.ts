@@ -27,6 +27,7 @@ import { TimeTableComponent } from './components/time-table/time-table.component
 import { PaymentsComponent } from './components/payments/payments.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { StudentComponent } from './components/student/student.component';
+import { SubjectComponent } from './components/subject/subject.component';
 
 const appRoutes: Routes = [
   {
@@ -144,6 +145,11 @@ const appRoutes: Routes = [
   {
     path: 'classes',
     component: ClassComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'subject',
+    component: SubjectComponent,
     canActivate : [AfterloginService]
   }
 ];

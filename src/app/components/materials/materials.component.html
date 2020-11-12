@@ -49,7 +49,7 @@
       </div>
 
     <p *ngIf="!material && !subjects">No Materials Found</p>
-    <div class="col-md-3 col-6 text-right float-right mb-4" *ngIf="isTeacher">
+    <div class="col-md-3 col-6 text-right float-right mb-4" *ngIf="isTeacher && class">
       <a class="text-white btn btn-info mr-5" (click)='add()'>Add New Material</a>
     </div>
     <ul class="timeline timeline-left" style="padding-right: 7%" *ngIf="material">

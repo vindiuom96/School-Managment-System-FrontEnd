@@ -29,6 +29,7 @@ export class MaterialsComponent implements OnInit {
   constructor(private role : RolesCheckService, private route : ActivatedRoute, private token : TokenService, private router : Router,private api : ApiService, private notify : SnotifyService) {
   }
 
+  class= false;
   ngOnInit() {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
@@ -39,6 +40,7 @@ export class MaterialsComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       if(params['subject']){
+        this.class = false;
         if(this.isParent || this.isStudent){
           this.isStudentorParent = true;
           this.api.get('materials?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
@@ -46,6 +48,7 @@ export class MaterialsComponent implements OnInit {
             error => { this.notify.error(error.error.message) }
           );
         } else if(this.isTeacher){
+        this.class = true;
           this.api.get('materials?teacher_id=' + JSON.parse(localStorage.getItem('user')).id + '&subject_id=' + params['subject'], this.headers).subscribe(
             data => this.datahandlerMaterial(data),
             error => { this.notify.error(error.error.message) }

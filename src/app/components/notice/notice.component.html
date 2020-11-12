@@ -1,6 +1,9 @@
 <div class="container my-4">
     <div class="card shadow">
       <div class="card-body">
+          <div class="col-md-3 col-6 text-right float-right mb-4" *ngIf="isTeacher">
+              <a class="text-white btn btn-info mr-5" (click)='add()'>Add New Notice</a>
+            </div><br><br><br>
         <div class="card" *ngFor="let n of notices">
             <div class="card-body collapse show" *ngIf="n.status=='true'">
                 <h4 class="card-title">{{ n.title }}</h4>

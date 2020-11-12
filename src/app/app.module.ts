@@ -40,6 +40,7 @@ import { TimeTableComponent } from './components/time-table/time-table.component
 import { PaymentsComponent } from './components/payments/payments.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { StudentComponent } from './components/student/student.component';
+import { SubjectComponent } from './components/subject/subject.component';
 
 
 
@@ -70,7 +71,8 @@ import { StudentComponent } from './components/student/student.component';
     TimeTableComponent,
     PaymentsComponent,
     NoticeComponent,
-    StudentComponent
+    StudentComponent,
+    SubjectComponent
   ],
   imports: [
     BrowserModule,

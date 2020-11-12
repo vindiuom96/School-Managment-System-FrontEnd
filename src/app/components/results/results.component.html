@@ -1,9 +1,9 @@
 <div class="container">
     <div class="card shadow my-4">
-        <div class="card-header border-0" *ngIf="isTeacher">
+        <div class="card-header border-0">
             <div class="row" style="margin-top: 30px;">
               <div class="col-6">
-                <h3 *ngIf="class">Select Class</h3>
+                <h3 *ngIf="class && isTeacher">Select Class</h3>
                 <h3 *ngIf="!class">Exam Results</h3>
               </div>
               <!-- <div class="col-md-3 col-6 text-right">
@@ -14,15 +14,6 @@
               </div>
             </div> -->
         </div>
-        <div class="form-group" *ngIf="!class">
-            <label for="sel1">Select list:</label>
-            <select class="form-control" id="sel1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
-          </div>
         <div class="row" *ngIf="class">
           <div class="col-12">
               <div class="card shadow mr-5" style="min-width: 18rem;" *ngFor="let class of classes">
@@ -37,9 +28,39 @@
               </div>
           </div>
       </div>
+
           <div class="col-md-3 col-6 text-right float-right mb-4" *ngIf="!class">
             <a class="text-white btn btn-info" (click)='add()'>Add New Result</a>
           </div>
+<div class="row">
+    <div class="col-4">
+        <div class="form-group" *ngIf="!class">
+          <label for="sel1">Class:</label>
+          <select class="form-control"  [(ngModel)]="classVar">
+            <option *ngFor="let class of classesData" value="{{class.id}}">{{class.grade}}-{{class.sub_class}}</option>
+          </select>
+          </div>
+          </div>
+          <div class="col-4">
+          <div class="form-group" *ngIf="!class && isTeacher">
+              <label for="sel1">Student:</label>
+              <select class="form-control"  [(ngModel)]="term">
+                <option value="1">164112H</option>
+                <option value="2">164110V</option>
+              </select>
+              </div>
+          </div>
+          <div class="col-4">
+      <div class="form-group" *ngIf="!class">
+        <label for="sel1">Term:</label>
+        <select class="form-control"  [(ngModel)]="term">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      </div>
+    </div>
       <div class="table-responsive" *ngIf="!class">
           <table class="table align-items-center table-flush text-center">
               <thead class="thead-light">
@@ -67,6 +88,18 @@
                   </td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                    <td></td><td></td><td></td>
+                <td class="text-right" style="background-color: beige">Sum</td>
+                <td style="background-color: beige">{{sum}}</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td>
+                    <td class="text-right" style="background-color: beige">Average</td>
+                    <td style="background-color: beige">{{sum/count}}</td>
+                    </tr>
+              </tfoot>
             </table>
           </div>
       <div class="card-header border-0" *ngIf="isParent || isStudent">
@@ -82,6 +115,28 @@
             </div>
           </div> -->
       </div>
+      <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                <label for="sel1">Class:</label>
+                <select class="form-control"  [(ngModel)]="classesData">
+                    <select class="form-control"  [(ngModel)]="classVar">
+                      <option value="{{classesData.id}}">{{classesData.grade}}-{{classesData.sub_class}}</option>
+                    </select>
+                </select>
+                </div>
+                </div>
+                <div class="col-6">
+            <div class="form-group">
+              <label for="sel1">Term:</label>
+              <select class="form-control"  [(ngModel)]="term">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            </div>
+          </div>
       <div class="table-responsive">
         <table class="table align-items-center table-flush text-center">
             <thead class="thead-light">
@@ -98,6 +153,18 @@
                 <td>{{ res.mark }}</td>
               </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                <td class="text-right" style="background-color: beige">Sum</td>
+                <td style="background-color: beige">{{sum}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-right" style="background-color: beige">Average</td>
+                    <td style="background-color: beige">{{sum/count}}</td>
+                    </tr>
+              </tfoot>
           </table>
         </div>
     </div>

@@ -5,11 +5,11 @@ import { RolesCheckService } from 'src/app/services/roles-check.service';
 import { SnotifyService } from 'ng-snotify';
 
 @Component({
-  selector: 'app-class',
-  templateUrl: './class.component.html',
-  styleUrls: ['./class.component.css']
+  selector: 'app-subject',
+  templateUrl: './subject.component.html',
+  styleUrls: ['./subject.component.css']
 })
-export class ClassComponent implements OnInit {
+export class SubjectComponent implements OnInit {
   model: any = {};
   classes = null;
 
@@ -78,8 +78,8 @@ export class ClassComponent implements OnInit {
 
   closeEditModal(){
     this.error = {
-      "grade" : null,
-      "sub_class" : null,
+      "year" : null,
+      "name" : null,
       "teacher_id" : null
     };
     var modal = document.getElementById('editModal');
@@ -113,8 +113,8 @@ export class ClassComponent implements OnInit {
   add(){
     this.notify.clear();
 
-    this.form.grade = null;
-    this.form.sub_class = null;
+    this.form.year = null;
+    this.form.name = null;
     this.form.teacher_id = null;
 
     var modal = document.getElementById('addModal');
@@ -137,26 +137,26 @@ export class ClassComponent implements OnInit {
   }
 
   data = {          //User Update Data
-    "grade" : null,
-    "sub_class" : null,
+    "year" : null,
+    "name" : null,
     "teacher_id" : null
   }
 
   form = {         //New User add Data
-    "grade" : null,
-    "sub_class" : null,
+    "year" : null,
+    "name" : null,
     "teacher_id" : null
   }
 
   error = {
-    "grade" : null,
-    "sub_class" : null,
+    "year" : null,
+    "name" : null,
     "teacher_id" : null
   };
   closeAddModal(){
     this.error = {
-      "grade" : null,
-      "sub_class" : null,
+      "year" : null,
+      "name" : null,
       "teacher_id" : null
     };
     var modal = document.getElementById('addModal');
@@ -164,3 +164,4 @@ export class ClassComponent implements OnInit {
   }
 
 }
+
