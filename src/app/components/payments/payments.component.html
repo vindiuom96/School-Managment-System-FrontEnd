@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isStudent || isParent">
+<div class="container" *ngIf="isAdmin || isStudent || isParent">
     <div class="card shadow my-4">
       <div class="card-header border-0">
         <!-- Nav tabs -->
@@ -23,7 +23,7 @@
                     </div>
                   </div> -->
               </div>
-              <div class="tab-pane  p-20" id="pay" role="tabpanel">
+              <div class="tab-pane  p-20" id="pay" role="tabpanel" *ngIf="isStudent || isParent">
                   <p>Next Payment at: {{ payhere.student.next_payment_at }}</p>
                   <form method="post" action="https://sandbox.payhere.lk/pay/checkout" ngNoForm>
                     <input type="hidden" name="merchant_id" [(ngModel)]="payHereData.merchant_id">    <!-- Replace your Merchant ID -->
@@ -51,6 +51,7 @@
                 <table class="table align-items-center table-flush text-center">
                     <thead class="thead-light">
                       <tr>
+                        <th scope="col" *ngIf="isAdmin">Student Index No</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Type</th>
@@ -60,6 +61,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let pay of payments">
+                        <td *ngIf="isAdmin">{{pay.student.indexNo}}</td>
                         <td *ngIf="pay.payment_at">{{ pay.payment_at }}</td>
                         <td *ngIf="!pay.payment_at" class="text-warning">{{ pay.created_at }}</td>
                         <td>{{ pay.amount }}</td>

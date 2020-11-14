@@ -185,6 +185,19 @@ export class AttendanceComponent implements OnInit {
   datahandlerStudent(data){
     console.log(data);
     this.students = data;
+    for(var i=0; i<this.students.length; i++){
+      if(this.students[i].attendance[0]){
+        if(this.students[i].attendance[0].state=='0')
+          this.students[i].attendance[0].state = false;
+        else
+          this.students[i].attendance[0].state = true;
+      } else if(this.students[i].attendance){
+        if(this.students[i].attendance.state=='0')
+        this.students[i].attendance.state = false;
+      else
+        this.students[i].attendance.state = true;
+      }
+    }
   }
 
   datahandler(data){
@@ -196,6 +209,14 @@ export class AttendanceComponent implements OnInit {
     }
     this.events = data;
 
+  }
+
+  status = false;
+  submit(id, event){
+    console.log(event);
+    var today = new Date();
+    this.api.get('attendance/mark?student_id=' + id + '&year=' + today.getFullYear() + '&month=' + today.getMonth() + '&day=' + today.getDate() + '&status=' + event.target.checked, this.headers).subscribe(
+    );
   }
 
 }

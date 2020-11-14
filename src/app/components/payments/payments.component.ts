@@ -54,6 +54,11 @@ export class PaymentsComponent implements OnInit {
           data => this.datahandlerStudent(data),
           error => { this.notify.error(error.error.message) }
         );
+      } else {
+        this.api.get('payments/history', this.headers).subscribe(
+          data => this.datahandler(data),
+          error => { this.notify.error(error.error.message) }
+        );
       }
     });
   }

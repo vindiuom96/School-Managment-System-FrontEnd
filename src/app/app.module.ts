@@ -41,6 +41,7 @@ import { PaymentsComponent } from './components/payments/payments.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { StudentComponent } from './components/student/student.component';
 import { SubjectComponent } from './components/subject/subject.component';
+import { SubjectGroupComponent } from './components/subject-group/subject-group.component';
 
 
 
@@ -72,7 +73,8 @@ import { SubjectComponent } from './components/subject/subject.component';
     PaymentsComponent,
     NoticeComponent,
     StudentComponent,
-    SubjectComponent
+    SubjectComponent,
+    SubjectGroupComponent
   ],
   imports: [
     BrowserModule,

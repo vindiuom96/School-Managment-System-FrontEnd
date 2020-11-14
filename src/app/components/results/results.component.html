@@ -36,24 +36,23 @@
     <div class="col-4">
         <div class="form-group" *ngIf="!class">
           <label for="sel1">Class:</label>
-          <select class="form-control"  [(ngModel)]="classVar">
-            <option *ngFor="let class of classesData" value="{{class.id}}">{{class.grade}}-{{class.sub_class}}</option>
+          <select class="form-control pt-1"  [(ngModel)]="classVar" (change)='ngOnInit()'>
+            <option *ngFor="let c of classesData" value="{{c.id}}">{{c.grade}}-{{c.sub_class}}</option>
           </select>
           </div>
           </div>
           <div class="col-4">
           <div class="form-group" *ngIf="!class && isTeacher">
               <label for="sel1">Student:</label>
-              <select class="form-control"  [(ngModel)]="term">
-                <option value="1">164112H</option>
-                <option value="2">164110V</option>
+              <select class="form-control pt-1"  [(ngModel)]="student" (change)='ngOnInit()'>
+                <option *ngFor="let c of students" value="{{c.id}}">{{c.indexNo}}</option>
               </select>
               </div>
           </div>
           <div class="col-4">
       <div class="form-group" *ngIf="!class">
         <label for="sel1">Term:</label>
-        <select class="form-control"  [(ngModel)]="term">
+        <select class="form-control pt-1"  [(ngModel)]="term" (change)='ngOnInit()'>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -119,8 +118,8 @@
           <div class="col-6">
               <div class="form-group">
                 <label for="sel1">Class:</label>
-                <select class="form-control"  [(ngModel)]="classesData">
-                    <select class="form-control"  [(ngModel)]="classVar">
+                <select class="form-control pt-1"  [(ngModel)]="classesData">
+                    <select class="form-control pt-1"  [(ngModel)]="classVar">
                       <option value="{{classesData.id}}">{{classesData.grade}}-{{classesData.sub_class}}</option>
                     </select>
                 </select>
@@ -129,7 +128,7 @@
                 <div class="col-6">
             <div class="form-group">
               <label for="sel1">Term:</label>
-              <select class="form-control"  [(ngModel)]="term">
+              <select class="form-control pt-1"  [(ngModel)]="term">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -196,22 +195,30 @@
                       {{ error.mark }}
                   </div>
               <form #newUserForm=ngForm>
-                <div class="form-group">
-                    <label for="name">Subject</label>
-                    <input type="text" class="form-control" id="name" name="subject" placeholder="Enter Subject"  required [(ngModel)]="data.subject"/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Index No</label>
-                    <input type="text" class="form-control" id="name" name="indexNo" placeholder="Enter Index No"  required [(ngModel)]="data.indexNo"/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Term</label>
-                    <input type="number" class="form-control" id="name" name="term" placeholder="Enter Term"  required [(ngModel)]="data.term"/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Mark</label>
-                    <input type="number" class="form-control" id="name" name="mark" placeholder="Enter MarkS"  required [(ngModel)]="data.mark"/>
-                </div>
+                <!-- <div class="form-group">
+                  <label for="name">Subject</label>
+                  <select class="form-control pt-1" name="subject" [(ngModel)]="data.subject">
+                    <option *ngFor="let s of subjects" value="{{s.id}}">{{s.name}}</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="name">Index No</label>
+                  <select class="form-control pt-1"  [(ngModel)]="data.indexNo" name="indexNo">
+                    <option *ngFor="let c of students" value="{{c.id}}">{{c.indexNo}}</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="name">Term</label>
+                  <select class="form-control pt-1" name="term"  [(ngModel)]="data.term">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+              </div> -->
+              <div class="form-group">
+                  <label for="name">Mark</label>
+                  <input type="number" class="form-control" id="name" name="mark" placeholder="Enter MarkS"  required [(ngModel)]="data.mark"/>
+              </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -251,15 +258,23 @@
 
                       <div class="form-group">
                           <label for="name">Subject</label>
-                          <input type="text" class="form-control" id="name" name="subject" placeholder="Enter Subject"  required [(ngModel)]="data.subject"/>
+                          <select class="form-control pt-1" name="subject" [(ngModel)]="data.subject">
+                            <option *ngFor="let s of subjects" value="{{s.id}}">{{s.name}}</option>
+                          </select>
                       </div>
                       <div class="form-group">
                           <label for="name">Index No</label>
-                          <input type="text" class="form-control" id="name" name="indexNo" placeholder="Enter Index No"  required [(ngModel)]="data.indexNo"/>
+                          <select class="form-control pt-1"  [(ngModel)]="data.indexNo" name="indexNo">
+                            <option *ngFor="let c of students" value="{{c.id}}">{{c.indexNo}}</option>
+                          </select>
                       </div>
                       <div class="form-group">
                           <label for="name">Term</label>
-                          <input type="number" class="form-control" id="name" name="term" placeholder="Enter Term"  required [(ngModel)]="data.term"/>
+                          <select class="form-control pt-1" name="term"  [(ngModel)]="data.term">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                          </select>
                       </div>
                       <div class="form-group">
                           <label for="name">Mark</label>

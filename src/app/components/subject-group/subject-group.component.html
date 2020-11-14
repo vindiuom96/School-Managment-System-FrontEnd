@@ -3,17 +3,17 @@
       <div class="card-header border-0">
           <div class="row" style="margin-top: 30px;">
             <div class="col-6">
-              <h3>Subject Management</h3>
+              <h3>Subject Groups</h3>
           </div>
               <div class="col-md-3 col-6 text-right float-right mb-4">
-                  <a class="text-white btn btn-info mr-5" (click)='add()'>Add New Subject</a>
+                  <a class="text-white btn btn-info mr-5" (click)='add()'>Add New Group</a>
                 </div>
               <div class="table-responsive">
                   <table class="table align-items-center table-flush text-center">
                       <thead class="thead-light">
                         <tr>
-                          <th scope="col">Year</th>
                           <th scope="col">Name</th>
+                          <th scope="col">Subjects</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -44,7 +44,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Edit Subject</h5>
+                <h5 class="modal-title">Edit Subject Groups</h5>
                 <button type="button" class="close" (click)='closeEditModal()'>
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -82,7 +82,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add New Class</h5>
+                <h5 class="modal-title">Add New Subject Group</h5>
                 <button type="button" class="close" (click)='closeAddModal()'>
                   <span aria-hidden="true">&times;</span>
                 </button>

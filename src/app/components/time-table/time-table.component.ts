@@ -152,14 +152,23 @@ export class TimeTableComponent implements OnInit {
     'X-Requested-With' : 'XMLHttpRequest'
   }
 
-  constructor(private role : RolesCheckService,private data: DataService , private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  constructor(private role : RolesCheckService , private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
     pg.boundaryLinks = true;
     pg.rotate = true;
   }
 
+  timeTables = null;
+  weekday=new Array(8);
   ngOnInit() {
+    this.weekday[1]="Monday";
+    this.weekday[2]="Tuesday";
+    this.weekday[3]="Wednesday";
+    this.weekday[4]="Thursday";
+    this.weekday[5]="Friday";
+    this.weekday[6]="Saturday";
+    this.weekday[7]="Sunday";
     this.notify.clear();
-    this.notify.info("Loading...", {timeout: 0});
+    this.notify.info("Loading...", {timeout: 2000});
     this.isAdmin = this.role.isAdmin || this.role.isSuperAdmin;
     this.isTeacher = this.role.isTeacher;
     this.isStudent = this.role.isStudent;
@@ -175,9 +184,28 @@ export class TimeTableComponent implements OnInit {
         data => this.datahandler(data),
         error => { this.notify.error(error.error.message); this.notify.error(error.error.message) }
       );
+    } else {
+      this.api.get('subjects', this.headers).subscribe(
+        data => this.subjects = data,
+        error => { this.notify.error(error.error.message) }
+      );
+      this.api.get('class/classall', this.headers).subscribe(
+        data => this.classes = data,
+        error => { this.notify.error(error.error.message) }
+      );
+      this.api.get('class/teacherall', this.headers).subscribe(
+        data => this.teachers = data,
+        error => { this.notify.error(error.error.message) }
+      );
+      this.api.get('timetable', this.headers).subscribe(
+        data => this.timeTables = data,
+        error => { this.notify.error(error.error.message); this.notify.error(error.error.message) }
+      );
     }
   }
-
+subjects = null;
+classes = null;
+teachers = null;
   datahandler(data){
     this.notify.clear();
     console.log(data);
@@ -191,6 +219,143 @@ export class TimeTableComponent implements OnInit {
     }
     this.events = data;
 
+  }
+
+
+  //User edit Handling
+  edit(id){
+    this.notify.clear();
+    this.api.get('timetable/'+id, this.headers).subscribe(
+      data => this.editDataHandler(data),
+      error => this.notify.error("Result Not Found", {timeout: 0})
+    );
+    this.data.id = id;
+    var modal = document.getElementById('editModal');
+    modal.style.display = "block";
+  }
+
+  editDataHandler(data){
+    console.log(data);
+    this.data.week_day = data.week_day;
+    this.data.start = data.start;
+    this.data.end = data.end;
+    // for(var i=0; i<data.roles.length; i++)
+    //   this.data.role.push(data.roles[i].name);
+  }
+
+  editsubmit(){
+    this.notify.clear();
+    this.notify.info("Wait...", {timeout: 0});
+    this.api.put('timetable/'+this.data.id, this.data, this.headers).subscribe(
+      data => {
+        this.notify.clear();
+        this.notify.info("User Updated Successfully", {timeout: 2000});
+        this.ngOnInit();
+        this.closeEditModal();
+      },
+      error => { this.notify.clear(); this.error = error.error.errors; }
+    );
+  }
+
+  closeEditModal(){
+    this.error = {
+      "week_day" : null,
+      "end" : null,
+      "start" : null,
+      "id" : null
+    };
+    var modal = document.getElementById('editModal');
+    modal.style.display = "none";
+  }
+
+  //User delete Handling
+  delete(id){
+    this.notify.clear();
+    this.notify.warning('Are you sure you want to detele?', 'Delete', {
+      timeout: 0,
+      showProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      buttons: [
+        {text: 'Yes', action: () => {
+          var headers = {
+            'Authorization' : this.token.get()
+          }
+          return this.api.delete('timetable/'+id, headers).subscribe(
+            data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
+            error => this.notify.error(error.message, {timeout: 0})
+          );
+        }, bold: false},
+        {text: 'No'}
+      ]
+    });
+  }
+
+  //New User add Handling
+  add(){
+    this.notify.clear();
+
+    this.form = {
+      "week_day" : null,
+      "end" : null,
+      "start" : null,
+      "id" : null,
+      "subject_id" : null,
+      "class_id" : null,
+      "teacher_id" : null,
+    }
+
+    var modal = document.getElementById('addModal');
+    modal.style.display = "block";
+  }
+
+  addModalSubmit(){
+    this.notify.clear();
+    this.notify.info("Wait...", {timeout: 0});
+    this.api.post('timetable', this.form, this.headers).subscribe(
+      data => {
+        this.notify.clear();
+        this.notify.info("User Added Successfully", {timeout: 2000});
+        this.ngOnInit();
+        this.closeAddModal();
+      },
+      error => { this.notify.clear(); this.error = error.error.errors; }
+    );
+
+  }
+
+  data = {          //User Update Data
+    "week_day" : null,
+    "end" : null,
+    "start" : null,
+    "id" : null
+  }
+
+  form = {
+    "week_day" : null,
+    "end" : null,
+    "start" : null,
+    "id" : null,
+    "subject_id" : null,
+    "class_id" : null,
+    "teacher_id" : null,
+  }
+
+  error = {
+    "week_day" : null,
+    "end" : null,
+    "start" : null,
+    "id" : null
+  };
+  closeAddModal(){
+    this.error = {
+      "week_day" : null,
+      "end" : null,
+      "start" : null,
+      "id" : null
+    };
+    var modal = document.getElementById('addModal');
+    modal.style.display = "none";
   }
 
 }

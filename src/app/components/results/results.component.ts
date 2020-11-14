@@ -29,13 +29,18 @@ export class ResultsComponent implements OnInit {
   constructor(private role : RolesCheckService, private route : ActivatedRoute, private token : TokenService, private router : Router,private api : ApiService, private notify : SnotifyService) {
   }
 
-  classesData : any = {
+  classesData : any = [{
     'id' : 1,
     'grade' : 12,
     'sub_class' : 'A'
-  };
-  classVar = null;
+  }];
+  classVar = 1;
+  student = 1;
+  subjects = null;
 
+  dataHandlerSub(data){
+    this.subjects = data[0].subject;
+  }
   ngOnInit() {
     this.notify.clear();
     this.notify.info("Loading...", {timeout: 0});
@@ -47,13 +52,21 @@ export class ResultsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if(params['results']){
         this.class = false;
-        this.api.get('results/mobile?&class_id=' + params['results'], this.headers).subscribe(
-          data => this.datahandlerresults(data),
+        this.api.get('results/mobile?&class_id=' + params['results'] + '&term=' + this.term + '&student_id=' + this.student, this.headers).subscribe(
+          data => {this.datahandlerresults(data); this.notify.clear()},
+          error => { this.notify.error(error.error.message) }
+        );
+        this.api.get('class/student', this.headers).subscribe(
+          data => {console.log(data), this.students = data; this.notify.clear()}
+        );
+        this.api.get('subjects?teacher_id=' + JSON.parse(localStorage.getItem('user')).id, this.headers).subscribe(
+          data => this.dataHandlerSub(data),
           error => { this.notify.error(error.error.message) }
         );
       } else {
         this.class = true;
         if(this.isParent || this.isStudent){
+          console.log('student');
           this.api.get('class/teacher?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
             data => this.dataHandler(data),
             error => { this.notify.error(error.error.message) }
@@ -78,6 +91,7 @@ export class ResultsComponent implements OnInit {
     });
   }
 
+  students = null;
   dataHandler(data){
     this.classesData = data;
     console.log(data);
@@ -85,7 +99,7 @@ export class ResultsComponent implements OnInit {
 
   sum = 0;
   count = 0;
-  term = null;
+  term = 1;
   class = false;
   classes = null;
   datahandlerresults(data){
@@ -95,7 +109,6 @@ export class ResultsComponent implements OnInit {
     for(var i=0; i<data.length; i++){
       this.sum += data[i].mark;
     }
-    console.log(data[i].mark);
   }
 
   datahandler(data){
@@ -112,12 +125,11 @@ export class ResultsComponent implements OnInit {
   //User edit Handling
   edit(id){
     this.notify.clear();
-    this.data = null;
-    // this.api.get('users/'+id, this.headers).subscribe(
-    //   data => this.editDataHandler(data),
-    //   error => this.notify.error("User Not Found", {timeout: 0})
-    // );
-    //this.data.id = id;
+    this.api.get('results/'+id, this.headers).subscribe(
+      data => this.editDataHandler(data),
+      error => this.notify.error("Result Not Found", {timeout: 0})
+    );
+    this.data.id = id;
     var modal = document.getElementById('editModal');
     modal.style.display = "block";
   }
@@ -132,15 +144,15 @@ export class ResultsComponent implements OnInit {
   editsubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    // this.api.put('users/'+this.data.id, this.data, this.headers).subscribe(
-    //   data => {
-    //     this.notify.clear();
-    //     this.notify.info("User Updated Successfully", {timeout: 2000});
-    //     this.ngOnInit();
-    //     this.closeEditModal();
-    //   },
-    //   error => { this.notify.clear(); this.error = error.error.errors; }
-    // );
+    this.api.put('results/'+this.data.id, this.data, this.headers).subscribe(
+      data => {
+        this.notify.clear();
+        this.notify.info("User Updated Successfully", {timeout: 2000});
+        this.ngOnInit();
+        this.closeEditModal();
+      },
+      error => { this.notify.clear(); this.error = error.error.errors; }
+    );
   }
 
   closeEditModal(){
@@ -167,10 +179,10 @@ export class ResultsComponent implements OnInit {
           var headers = {
             'Authorization' : this.token.get()
           }
-          // return this.api.delete('users/'+id, headers).subscribe(
-          //   data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
-          //   error => this.notify.error(error.message, {timeout: 0})
-          // );
+          return this.api.delete('results/'+id, headers).subscribe(
+            data => {this.notify.info("Success", {timeout: 2000}); this.ngOnInit(); },
+            error => this.notify.error(error.message, {timeout: 0})
+          );
         }, bold: false},
         {text: 'No'}
       ]
@@ -204,22 +216,23 @@ export class ResultsComponent implements OnInit {
   addModalSubmit(){
     this.notify.clear();
     this.notify.info("Wait...", {timeout: 0});
-    // this.api.post('users', this.form, this.headers).subscribe(
-    //   data => {
-    //     this.notify.clear();
-    //     this.notify.info("User Added Successfully", {timeout: 2000});
-    //     this.ngOnInit();
-    //     this.closeAddModal();
-    //   },
-    //   error => { this.notify.clear(); this.error = error.error.errors; }
-    // );
+    this.api.post('results', this.data, this.headers).subscribe(
+      data => {
+        this.notify.clear();
+        this.notify.info("User Added Successfully", {timeout: 2000});
+        this.ngOnInit();
+        this.closeAddModal();
+      },
+      error => { this.notify.clear(); this.error = error.error.errors; }
+    );
 
   }
 
   data = {          //User Update Data
     "id" : null,
     "name" : null,
-    "role" : []
+    "role" : [],
+    "class_id" : this.classVar
   }
 
   form = {         //New User add Data

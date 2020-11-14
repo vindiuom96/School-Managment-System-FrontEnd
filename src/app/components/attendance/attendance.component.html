@@ -110,7 +110,7 @@
                   <td>{{ student.user.name }}</td>
                   <td>
                       <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="attendance" (change)="submit(student.id, $event)" (checked)="student.attendance[0].state">
                         <span class="slider"></span>
                       </label>
                   </td>

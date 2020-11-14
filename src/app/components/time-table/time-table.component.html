@@ -71,3 +71,183 @@
     </div>
   </div>
 </div>
+
+<div class="container my-4">
+    <div class="card shadow">
+      <div class="card-body">
+        <h2>TimeTable</h2>
+        <div class="card-header border-0">
+            <div class="row">
+              <div class="col-12 text-right">
+                <a class="text-white btn btn-info float-right" (click)='add()'>Add New</a>
+              </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush text-center">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">End</th>
+                  <th scope="col">Teacher</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Class</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of timeTables">
+                    <td>{{ weekday[t.week_day] }}</td>
+                    <td>{{ t.start }}</td>
+                    <td>{{ t.end }}</td>
+                    <td>{{ t.teacher.user.name }}</td>
+                    <td>{{ t.subject.name }}</td>
+                    <td>{{ t.class.grade }} - {{ t.class.sub_class }}</td>
+                  <td>
+                    <a href="javascript:void(0)" class="item"  (click)='edit( t.id )' data-toggle="tooltip" data-placement="top" title="Edit" style="padding-right: 10px;">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="item"  (click)='delete( t.id )' data-toggle="tooltip" data-placement="top" title="Delete" style="padding-right: 10px;">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- The Modal -->
+  <div id="editModal" class="modal" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Result</h5>
+              <button type="button" class="close" (click)='closeEditModal()'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" [hidden]="!error.week_day">
+                  {{ error.week_day }}
+                </div>
+                <div class="alert alert-danger" [hidden]="!error.indexNo">
+                    {{ error.indexNo }}
+                </div>
+                <div class="alert alert-danger" [hidden]="!error.term">
+                    {{ error.term }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.mark">
+                      {{ error.mark }}
+                  </div>
+              <form #newUserForm=ngForm>
+                  <div class="form-group">
+                      <label for="name">Subject</label>
+                      <select class="form-control pt-1" name="week_day" [(ngModel)]="data.week_day">
+                        <option value="1">Mon</option>
+                        <option value="2">Tue</option>
+                        <option value="3">Wed</option>
+                        <option value="4">Thu</option>
+                        <option value="5">Fri</option>
+                        <option value="6">Sat</option>
+                        <option value="7">Sun</option>
+                      </select>
+                  </div>
+              <div class="form-group">
+                  <label for="name">Start</label>
+                  <input type="time" class="form-control" id="name" name="start" placeholder="Enter"  required [(ngModel)]="data.start"/>
+              </div>
+              <div class="form-group">
+                  <label for="name">End</label>
+                  <input type="time" class="form-control" id="name" name="end" placeholder="Enter"  required [(ngModel)]="data.end"/>
+              </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary"  [disabled]="!newUserForm.valid" (click)='editsubmit()'>Save changes</button>
+              <button type="button" class="btn btn-secondary" (click)='closeEditModal()'>Close</button>
+            </div>
+          </div>
+        </div>
+
+  </div>
+
+  <!-- The Modal -->
+  <div id="addModal" class="modal" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add New Result</h5>
+              <button type="button" class="close" (click)='closeAddModal()'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" [hidden]="!error.subject">
+                    {{ error.subject }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.indexNo">
+                      {{ error.indexNo }}
+                  </div>
+                  <div class="alert alert-danger" [hidden]="!error.term">
+                      {{ error.term }}
+                    </div>
+                    <div class="alert alert-danger" [hidden]="!error.mark">
+                        {{ error.mark }}
+                    </div>
+              <form #editUserForm=ngForm>
+
+                  <div class="form-group">
+                      <label for="name">WeekDay</label>
+                      <select class="form-control pt-1" name="week_day" [(ngModel)]="form.week_day">
+                        <option value="1">Mon</option>
+                        <option value="2">Tue</option>
+                        <option value="3">Wed</option>
+                        <option value="4">Thu</option>
+                        <option value="5">Fri</option>
+                        <option value="6">Sat</option>
+                        <option value="7">Sun</option>
+                      </select>
+                  </div>
+              <div class="form-group">
+                  <label for="name">Start</label>
+                  <input type="time" class="form-control" id="name" name="start" placeholder="Enter"  required [(ngModel)]="form.start"/>
+              </div>
+              <div class="form-group">
+                  <label for="name">End</label>
+                  <input type="time" class="form-control" id="name" name="end" placeholder="Enter"  required [(ngModel)]="form.end"/>
+              </div>
+              <div class="form-group">
+                  <label for="name">Teacher</label>
+                  <select class="form-control pt-1" name="class" [(ngModel)]="form.teacher_id">
+                      <option *ngFor="let c of teachers" value="{{c.id}}">{{c.user.name}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                  <label for="name">Class</label>
+                  <select class="form-control pt-1" name="class" [(ngModel)]="form.class_id">
+                      <option *ngFor="let c of classes" value="{{c.id}}">{{c.grade}}-{{c.sub_class}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                  <label for="name">Subject</label>
+                  <select class="form-control pt-1" name="subject" [(ngModel)]="form.subject_id">
+                      <option *ngFor="let s of subjects" value="{{s.id}}">{{s.name}}</option>
+                    </select>
+              </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)='addModalSubmit()' [disabled]="!editUserForm.valid">Save changes</button>
+              <button type="button" class="btn btn-secondary" (click)='closeAddModal()'>Close</button>
+            </div>
+          </div>
+        </div>
+  </div>

@@ -5,11 +5,12 @@ import { RolesCheckService } from 'src/app/services/roles-check.service';
 import { SnotifyService } from 'ng-snotify';
 
 @Component({
-  selector: 'app-subject',
-  templateUrl: './subject.component.html',
-  styleUrls: ['./subject.component.css']
+  selector: 'app-subject-group',
+  templateUrl: './subject-group.component.html',
+  styleUrls: ['./subject-group.component.css']
 })
-export class SubjectComponent implements OnInit {
+export class SubjectGroupComponent implements OnInit {
+
   model: any = {};
   classes = null;
 

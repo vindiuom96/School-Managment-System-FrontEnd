@@ -28,6 +28,7 @@ import { PaymentsComponent } from './components/payments/payments.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { StudentComponent } from './components/student/student.component';
 import { SubjectComponent } from './components/subject/subject.component';
+import { SubjectGroupComponent } from './components/subject-group/subject-group.component';
 
 const appRoutes: Routes = [
   {
@@ -150,6 +151,11 @@ const appRoutes: Routes = [
   {
     path: 'subject',
     component: SubjectComponent,
+    canActivate : [AfterloginService]
+  },
+  {
+    path: 'subjectManage',
+    component: SubjectGroupComponent,
     canActivate : [AfterloginService]
   }
 ];
