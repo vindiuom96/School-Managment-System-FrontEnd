@@ -1,32 +1,59 @@
-<div class="body">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <div class="alert alert-danger" [hidden]="!error">
-                {{ error }}
-              </div>
-            <h5 class="card-title text-center">Reset Password</h5>
-            <form class="form-signin" #ResetResponseForm=ngForm (ngSubmit)="onSubmit()">
-              <div class="form-label-group">
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="form.email">
-              </div>
-
-              <div class="form-label-group">
-                <input type="password" name="password" id="inputPassword" [(ngModel)]="form.password" class="form-control" placeholder="Password" required>
-              </div>
-
-              <div class="form-label-group">
-                <input type="password" name="password_confirmation" id="inputPasswordConfirmation" [(ngModel)]="form.password_confirmation" class="form-control" placeholder="Re Enter Password" required>
-              </div>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!ResetResponseForm.valid">Change Password</button>
-            </form>
-
-          </div>
+<div class="main-content bg-default">
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-4 py-lg-5">
+      <div class="container">
+        <div class="header-body text-center mb-7">
         </div>
       </div>
+
+
+      <div class="body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body">
+                    <div class="alert alert-danger" [hidden]="!error">
+                        {{ error }}
+                      </div>
+                    <h5 class="card-title text-center">Reset Password</h5>
+                    <form class="form-signin" #ResetResponseForm=ngForm (ngSubmit)="onSubmit()">
+                      <div class="form-label-group">
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="form.email">
+                      </div>
+
+                      <div class="form-label-group">
+                        <input type="password" name="password" id="inputPassword" [(ngModel)]="form.password" class="form-control" placeholder="Password" required>
+                      </div>
+
+                      <div class="form-label-group">
+                        <input type="password" name="password_confirmation" id="inputPasswordConfirmation" [(ngModel)]="form.password_confirmation" class="form-control" placeholder="Re Enter Password" required>
+                      </div>
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!ResetResponseForm.valid">Change Password</button>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
-  </div>
-</div>
+    </div>
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>

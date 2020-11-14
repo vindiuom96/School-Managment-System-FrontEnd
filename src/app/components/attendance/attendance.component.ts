@@ -152,7 +152,8 @@ export class AttendanceComponent implements OnInit {
     'X-Requested-With' : 'XMLHttpRequest'
   }
 
-  constructor(private role : RolesCheckService,private data: DataService , private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService) {
+  today = new Date();
+  constructor(private role : RolesCheckService,private data: DataService , private pg: NgbPaginationConfig, private token : TokenService, private http : HttpClient, private router : Router,private api : ApiService, private notify : SnotifyService){
     pg.boundaryLinks = true;
     pg.rotate = true;
   }
@@ -170,11 +171,20 @@ export class AttendanceComponent implements OnInit {
       this.stuAtt = true;
       this.api.get('attendance?student_id=' + localStorage.getItem('student_id') + '&page=' + this.pagination.page, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.error(error.error.message) }
       );
-    } else {
-      this.notify.clear();
+    } else if(this.isTeacher){
+      this.api.get('attendance/student?student_id=' + localStorage.getItem('student_id') + '&page=' + this.pagination.page, this.headers).subscribe(
+        data => this.datahandlerStudent(data),
+        error => { this.notify.error(error.error.message) }
+      );
     }
+  }
+
+  students = null;
+  datahandlerStudent(data){
+    console.log(data);
+    this.students = data;
   }
 
   datahandler(data){

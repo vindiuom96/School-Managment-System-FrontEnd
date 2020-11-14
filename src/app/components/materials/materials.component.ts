@@ -43,12 +43,12 @@ export class MaterialsComponent implements OnInit {
           this.isStudentorParent = true;
           this.api.get('materials?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
             data => this.datahandlerMaterial(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         } else if(this.isTeacher){
           this.api.get('materials?teacher_id=' + JSON.parse(localStorage.getItem('user')).id + '&subject_id=' + params['subject'], this.headers).subscribe(
             data => this.datahandlerMaterial(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         }
       } else {
@@ -56,12 +56,12 @@ export class MaterialsComponent implements OnInit {
           this.isStudentorParent = true;
           this.api.get('subjects?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
             data => this.datahandler(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         } else if(this.isTeacher){
           this.api.get('subjects?teacher_id=' + JSON.parse(localStorage.getItem('user')).id, this.headers).subscribe(
             data => this.datahandler(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         }
       }

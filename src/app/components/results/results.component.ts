@@ -42,7 +42,7 @@ export class ResultsComponent implements OnInit {
         this.class = false;
         this.api.get('results/mobile?&class_id=' + params['results'], this.headers).subscribe(
           data => this.datahandlerresults(data),
-          error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+          error => { this.notify.error(error.error.message) }
         );
       } else {
         this.class = true;
@@ -50,7 +50,7 @@ export class ResultsComponent implements OnInit {
           this.isStudentorParent = true;
           this.api.get('results/mobile?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
             data => this.datahandler(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         } else if(this.isTeacher) {
           this.api.get('class/teacher', this.headers).subscribe(

@@ -89,33 +89,32 @@
   <div class="card shadow my-4">
     <div class="card-header border-0">
         <div class="col-6">
-          <h3>Payment Details</h3>
+          <h3>Payment Details of Students</h3>
         </div>
         <div class="table-responsive">
-          <table class="table align-items-center table-flush text-center">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let pay of payments">
-                  <td *ngIf="pay.payment_at">{{ pay.payment_at }}</td>
-                  <td *ngIf="!pay.payment_at" class="text-warning">{{ pay.created_at }}</td>
-                  <td>{{ pay.amount }}</td>
-                  <td>{{ pay.type }}</td>
-                  <td>{{ pay.note }}</td>
-                  <td>
-                      <span *ngIf="pay.note=='Paid'"> <i class="text-success fas fa-check-circle"></i></span>
-                      <span *ngIf="pay.note!='Paid'"> <i class="text-danger fas fa-times-circle"></i></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush text-center">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Student IndexNo</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Next Payment Date</th>
+                    <th scope="col">Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of students">
+                    <td>{{ student.indexNo }}</td>
+                    <td>{{ student.user.name }}</td>
+                    <td>{{ student.date }}</td>
+                    <td>
+                      <span *ngIf="student.next_payment_at >= today"> <i class="text-success fas fa-check-circle"></i></span>
+                      <span *ngIf="student.next_payment_at < today"> <i class="text-danger fas fa-times-circle"></i></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
       </div>
     </div>

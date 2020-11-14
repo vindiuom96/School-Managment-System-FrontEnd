@@ -58,12 +58,12 @@
           </div>
         </div>
         <div class="row mt-3">
-          <div class="col-6">
+          <div class="col-12 text-center">
             <a [routerLink]="['/reset-password']" routerLinkActive="router-link-active" class="text-light"><small>Forgot password?</small></a>
           </div>
-          <div class="col-6 text-right">
+          <!-- <div class="col-6 text-right">
             <a href="#" class="text-light"><small>Create new account</small></a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
   <div class="modal-dialog" permission="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Choose Student</h5>
+        <h5 class="modal-title"></h5>
         <button type="button" class="close" (click)='closeAddModal()'>
           <span aria-hidden="true">&times;</span>
         </button>
@@ -86,13 +86,13 @@
 
             <div class="form-group">
                 <div class="row">
-                  <div class='col-6'>
-                    <label for="student">Student</label>
+                  <div class='col-12'>
+                    <label for="student">Choose Student</label>
                   </div>
-                  <div class='col-6'>
-                    <select name="student" [(ngModel)]="name" required>
-                      <option *ngFor="let st of students" value="{{ st.id }}">{{ st.indexNo }} - {{ st.user.name }}</option>
-                    </select>
+                  <div class='col-12'>
+                    <div class="radio" *ngFor="let st of students">
+                      <label><input type="radio" name="student" [(ngModel)]="name" value="{{st.id}}" required>  {{ st.indexNo }} - {{ st.user.name }}</label>
+                    </div>
                 </div>
               </div>
             </div>

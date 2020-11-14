@@ -1,4 +1,4 @@
-<div class="container my-4" *ngIf="stuAtt">
+<div class="container my-4" *ngIf="isStudent || isParent">
   <div class="card shadow">
     <div class="card-body">
       <div class="row text-center">
@@ -86,3 +86,39 @@
     </div>
   </div>
 </div>
+
+  <div class="container" *ngIf="isTeacher">
+  <div class="card shadow my-4">
+    <div class="card-header border-0">
+        <div class="col-6">
+          <h3>Attendance Mark</h3>
+        </div>
+        <p class="text-right">{{today | date:'yyyy-MM-dd'}}</p>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush text-center">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Student IndexNo</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of students">
+                  <td>{{ student.indexNo }}</td>
+                  <td>{{ student.user.name }}</td>
+                  <td>
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+

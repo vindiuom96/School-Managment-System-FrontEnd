@@ -43,19 +43,30 @@ export class PaymentsComponent implements OnInit {
         this.isStudentorParent = true;
         this.api.get('payments/history?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
           data => this.datahandler(data),
-          error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+          error => { this.notify.error(error.error.message) }
         );
         this.api.get('payments/pay?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
           data => this.datahandlerPay(data),
-          error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+          error => { this.notify.error(error.error.message) }
         );
       } else if(this.isTeacher){
-        this.api.get('payments/history', this.headers).subscribe(
-          data => this.datahandler(data),
+        this.api.get('attendance/student', this.headers).subscribe(
+          data => this.datahandlerStudent(data),
           error => { this.notify.error(error.error.message) }
         );
       }
     });
+  }
+
+  students = null;
+  today = new Date();
+  datahandlerStudent(data){
+    for(var i=0; i<data.length; i++){
+      data[i]['date'] = data[i].next_payment_at;
+      data[i].next_payment_at = new Date(data[i].next_payment_at);
+    }
+    console.log(data);
+    this.students = data;
   }
 
   datahandler(data){

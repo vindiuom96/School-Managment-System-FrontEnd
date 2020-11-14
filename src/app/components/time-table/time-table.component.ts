@@ -167,13 +167,13 @@ export class TimeTableComponent implements OnInit {
     if(this.isParent || this.isStudent){
       this.api.get('timetable/mobile?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.notify.error(error.error.message); this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.error(error.error.message); this.notify.error(error.error.message) }
       );
     } else if(this.isTeacher){
       console.log(JSON.parse(localStorage.getItem('user')));
       this.api.get('timetable/mobile?teacher_id=' + JSON.parse(localStorage.getItem('user')).id, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.notify.error(error.error.message); this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.error(error.error.message); this.notify.error(error.error.message) }
       );
     }
   }

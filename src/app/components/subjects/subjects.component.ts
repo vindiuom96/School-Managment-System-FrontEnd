@@ -43,7 +43,7 @@ export class SubjectsComponent implements OnInit {
           this.isStudentorParent = true;
           this.api.get('materials?student_id=' + localStorage.getItem('student_id') + '&subject_id=' + params['subject'], this.headers).subscribe(
             data => this.datahandlerMaterial(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         } else {
           this.notify.clear();
@@ -53,7 +53,7 @@ export class SubjectsComponent implements OnInit {
           this.isStudentorParent = true;
           this.api.get('subjects?student_id=' + localStorage.getItem('student_id'), this.headers).subscribe(
             data => this.datahandler(data),
-            error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+            error => { this.notify.error(error.error.message) }
           );
         } else {
           this.notify.clear();

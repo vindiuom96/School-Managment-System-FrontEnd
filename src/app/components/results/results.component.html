@@ -14,6 +14,15 @@
               </div>
             </div> -->
         </div>
+        <div class="form-group" *ngIf="!class">
+            <label for="sel1">Select list:</label>
+            <select class="form-control" id="sel1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
         <div class="row" *ngIf="class">
           <div class="col-12">
               <div class="card shadow mr-5" style="min-width: 18rem;" *ngFor="let class of classes">

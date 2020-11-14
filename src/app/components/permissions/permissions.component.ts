@@ -55,11 +55,11 @@ export class PermissionsComponent implements OnInit {
     if(this.keyword)
       this.api.get('permissions?search=' + this.keyword + '&page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.notify.clear(); this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.clear(); this.notify.error(error.error.message) }
       ); else
       this.api.get('permissions?page=' + this.pagination.page + '&sort=' + this.sortData.col + '&order=' + this.sortData.order, this.headers).subscribe(
         data => this.datahandler(data),
-        error => { this.token.remove(); this.router.navigateByUrl("/login"); }
+        error => { this.notify.error(error.error.message) }
       );
   }
 
